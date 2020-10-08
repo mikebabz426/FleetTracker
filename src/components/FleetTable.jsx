@@ -15,6 +15,7 @@ const FleetTable = () => {
 				<TableBody>
 					{truckList.map((truck) => (
 						<TruckRow
+							key={truck.id}
 							id={truck.id}
 							day={truck.day}
 							driver={truck.driver}

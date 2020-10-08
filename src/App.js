@@ -1,11 +1,14 @@
 import React from "react";
 import Layout from "./components/Layout";
+import { TruckProvider } from "./FleetContext";
 
 function App() {
 	return (
-		<div className="App">
-			<Layout />
-		</div>
+		<TruckProvider>
+			<div className="App">
+				<Layout />
+			</div>
+		</TruckProvider>
 	);
 }
 

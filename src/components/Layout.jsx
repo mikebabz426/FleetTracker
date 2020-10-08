@@ -3,6 +3,7 @@ import { ThemeProvider, Grid } from "@material-ui/core";
 import theme from "./../theme";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "./Header";
+import FleetTable from "./FleetTable";
 
 const useStyles = makeStyles({
 	customHeader: {
@@ -21,7 +22,7 @@ const Layout = () => {
 				<Grid item container>
 					<Grid item xs={false} sm={1} />
 					<Grid item xs={12} sm={10}>
-						{/* <Content /> */}
+						<FleetTable />
 					</Grid>
 					<Grid item xs={false} sm={1} />
 				</Grid>

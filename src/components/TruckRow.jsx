@@ -1,6 +1,6 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import Selector from "./selector";
+import { TextField, TableCell, TableRow } from "@material-ui/core";
+import Selector from "./Selector";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 
 const StyledTableCell = withStyles((theme) => ({
@@ -29,21 +29,39 @@ const useStyles = makeStyles({
 	notes: {
 		backgroundColor: "#fff",
 	},
+	location: {
+		fontWeight: "bold",
+	},
 });
 
-const TruckRow = () => {
+const TruckRow = (props) => {
 	const classes = useStyles();
 
+	const {
+		id,
+		day,
+		driver,
+		cell,
+		truck,
+		trailer,
+		type,
+		location,
+		usState,
+		time,
+		needs,
+		notes,
+	} = props;
+
 	return (
-		<StyledTableRow key={row.truck}>
+		<StyledTableRow key={id}>
 			<StyledTableCell component="th" scope="row">
-				{row.day}
+				{day}
 			</StyledTableCell>
-			<StyledTableCell>{row.cellPhone}</StyledTableCell>
-			<StyledTableCell>{row.driver}</StyledTableCell>
-			<StyledTableCell>{row.truck}</StyledTableCell>
-			<StyledTableCell>{row.trailer}</StyledTableCell>
-			<StyledTableCell>{row.type}</StyledTableCell>
+			<StyledTableCell>{cell}</StyledTableCell>
+			<StyledTableCell>{driver}</StyledTableCell>
+			<StyledTableCell>{truck}</StyledTableCell>
+			<StyledTableCell>{trailer}</StyledTableCell>
+			<StyledTableCell>{type}</StyledTableCell>
 			<StyledTableCell>
 				<TextField
 					className={classes.location}
@@ -51,10 +69,11 @@ const TruckRow = () => {
 					label="Location"
 					color="secondary"
 					size="small"
+					value={location}
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
-				<Selector label="usState" />
+				<Selector label="usState" st={usState} />
 			</StyledTableCell>
 			<StyledTableCell>
 				<TextField
@@ -63,6 +82,7 @@ const TruckRow = () => {
 					label="time"
 					color="secondary"
 					size="small"
+					value={time}
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
@@ -72,6 +92,7 @@ const TruckRow = () => {
 					label="needs"
 					color="secondary"
 					size="small"
+					value={needs}
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
@@ -81,6 +102,7 @@ const TruckRow = () => {
 					label="notes"
 					color="secondary"
 					size="small"
+					value={notes}
 				/>
 			</StyledTableCell>
 		</StyledTableRow>
