@@ -1,19 +1,23 @@
 import React from "react";
-import truckList from "./../services/trucks";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHeader from "./TableHeader";
 import TableBody from "@material-ui/core/TableBody";
 import TruckRow from "./TruckRow";
+import { TruckContext } from './../FleetContext';
+import {useContext} from 'react'
+
 
 const FleetTable = () => {
+	const [trucks]  = useContext(TruckContext);
+
 	return (
 		<TableContainer component={Paper}>
 			<Table aria-label="customized table">
 				<TableHeader />
 				<TableBody>
-					{truckList.map((truck) => (
+					{trucks.map((truck) => (
 						<TruckRow
 							key={truck.id}
 							id={truck.id}

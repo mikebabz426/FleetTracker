@@ -2,6 +2,8 @@ import React from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
 import Selector from "./Selector";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import {useContext} from 'react'
+import { TruckContext } from './../FleetContext';
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
@@ -34,8 +36,12 @@ const useStyles = makeStyles({
 	},
 });
 
+
 const TruckRow = (props) => {
 	const classes = useStyles();
+	const [trucks, setTrucks]  = useContext(TruckContext);
+			
+	
 
 	const {
 		id,
@@ -52,6 +58,8 @@ const TruckRow = (props) => {
 		notes,
 	} = props;
 
+	
+
 	return (
 		<StyledTableRow key={id}>
 			<StyledTableCell component="th" scope="row">
@@ -64,6 +72,14 @@ const TruckRow = (props) => {
 			<StyledTableCell>{type}</StyledTableCell>
 			<StyledTableCell>
 				<TextField
+					onChange={(e) => {
+					const updatedLocation = e.target.value;
+					const key = id;
+					setTrucks(trucks => {
+						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, location:updatedLocation} : truck);
+						return [...updatedTrucks];
+					})
+						}}
 					className={classes.location}
 					variant="outlined"
 					label="Location"
