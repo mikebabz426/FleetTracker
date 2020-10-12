@@ -50,4 +50,16 @@ const stateAbbreviations = [
 	"WY",
 ];
 
+const weekDays = [
+	'Mon',
+	'Tue',
+	'Wed',
+	'Thu',
+	'Fri',
+	'Sat',
+	'Sun',
+]
+
+
+
 export default stateAbbreviations;

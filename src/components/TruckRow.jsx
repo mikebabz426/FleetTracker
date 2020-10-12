@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
-import Selector from "./Selector";
+import StateSelector from "./StateSelector";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import {useContext} from 'react'
 import { TruckContext } from './../FleetContext';
@@ -39,9 +39,9 @@ const useStyles = makeStyles({
 
 const TruckRow = (props) => {
 	const classes = useStyles();
-	const [trucks, setTrucks]  = useContext(TruckContext);
+	const [, setTrucks]  = useContext(TruckContext);
 			
-	
+	// console.log(useContext(TruckContext))
 
 	const {
 		id,
@@ -89,7 +89,7 @@ const TruckRow = (props) => {
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
-				<Selector label="usState" st={usState} />
+				<StateSelector label="usState" st={usState} />
 			</StyledTableCell>
 			<StyledTableCell>
 				<TextField

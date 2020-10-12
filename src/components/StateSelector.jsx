@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Selector = (props) => {
+const StateSelector = (props) => {
 	const classes = useStyles();
 	const [state, setState] = React.useState({
 		usState: props.st,
@@ -56,4 +56,4 @@ const Selector = (props) => {
 	);
 };
 
-export default Selector;
+export default StateSelector;
