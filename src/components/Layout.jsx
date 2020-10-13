@@ -20,11 +20,11 @@ const Layout = () => {
 					<Header />
 				</Grid>
 				<Grid item container>
-					<Grid item xs={false} sm={1} />
-					<Grid item xs={12} sm={10}>
+					<Grid item xs={false} sm={false} />
+					<Grid item xs={12} sm={12}>
 						<FleetTable />
 					</Grid>
-					<Grid item xs={false} sm={1} />
+					<Grid item xs={false} sm={false} />
 				</Grid>
 			</Grid>
 		</ThemeProvider>

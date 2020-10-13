@@ -1,12 +1,12 @@
-import React from "react";
+import React, {useContext}  from "react";
+import { TruckContext } from './../FleetContext';
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHeader from "./TableHeader";
 import TableBody from "@material-ui/core/TableBody";
 import TruckRow from "./TruckRow";
-import { TruckContext } from './../FleetContext';
-import {useContext} from 'react'
+
 
 
 const FleetTable = () => {
@@ -30,6 +30,7 @@ const FleetTable = () => {
 							location={truck.location}
 							usState={truck.usState}
 							time={truck.time}
+							appt={truck.appt}
 							needs={truck.needs}
 							notes={truck.notes}
 						/>

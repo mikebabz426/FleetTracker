@@ -26,6 +26,7 @@ const TableHeader = () => {
 				<StyledTableCell>Location</StyledTableCell>
 				<StyledTableCell>State</StyledTableCell>
 				<StyledTableCell>Time</StyledTableCell>
+				<StyledTableCell>Appt</StyledTableCell>
 				<StyledTableCell>Needs</StyledTableCell>
 				<StyledTableCell>Notes</StyledTableCell>
 			</TableRow>

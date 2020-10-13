@@ -1,32 +1,20 @@
-import React from "react";
+import React, {useContext} from "react";
 import { InputLabel, FormControl, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import stateAbbreviations from "../services/usStates";
+import { TruckContext } from './../FleetContext';
 
-const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 120,
-	},
-	selectEmpty: {
-		marginTop: theme.spacing(2),
-	},
-	selected: {
-		fontWeight: "bold",
-	},
-}));
 
 const StateSelector = (props) => {
 	const classes = useStyles();
-	const [state, setState] = React.useState({
-		usState: props.st,
-	});
+	const [, setTrucks]  = useContext(TruckContext);
 
-	const handleChange = (event) => {
-		const usState = event.target.name;
-		setState({
-			...state,
-			[usState]: event.target.value,
+	const handleUsStateChange = (e) => {
+		const updatedUsState = e.target.value;
+		const key = props.id
+		setTrucks(trucks => {
+			let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, usState:updatedUsState} : truck)
+			return [...updatedTrucks]
 		});
 	};
 
@@ -38,8 +26,8 @@ const StateSelector = (props) => {
 				size="small"
 				className={classes.selected}
 				native
-				value={state.usState}
-				onChange={handleChange}
+				value={props.st}
+				onChange={(e) => handleUsStateChange(e)}
 				label="State"
 				inputProps={{
 					name: "usState",
@@ -55,5 +43,20 @@ const StateSelector = (props) => {
 		</FormControl>
 	);
 };
+
+//Custom Component Styling
+
+const useStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 120,
+	},
+	selectEmpty: {
+		marginTop: theme.spacing(2),
+	},
+	selected: {
+		fontWeight: "bold",
+	},
+}));
 
 export default StateSelector;
