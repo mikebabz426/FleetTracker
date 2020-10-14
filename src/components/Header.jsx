@@ -14,7 +14,7 @@ const Header = () => {
 		<AppBar color="primary" position="static">
 			<Toolbar>
 				<Typography className={classes.typographyStyles} variant="h6">
-					Fleet Tracker
+					My Fleet Tracker
 				</Typography>
 			</Toolbar>
 		</AppBar>

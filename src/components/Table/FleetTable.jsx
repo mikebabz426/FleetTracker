@@ -1,10 +1,10 @@
 import React, {useContext}  from "react";
-import { TruckContext } from './../FleetContext';
+import { TruckContext } from '../../FleetContext';
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
-import TableHeader from "./TableHeader";
 import TableBody from "@material-ui/core/TableBody";
+import TableHeader from "./TableHeader";
 import TruckRow from "./TruckRow";
 
 

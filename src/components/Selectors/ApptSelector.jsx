@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
-import { TruckContext } from './../FleetContext';
+import { TruckContext } from '../../FleetContext';
 
 const ApptSelector = ( props) => {
 

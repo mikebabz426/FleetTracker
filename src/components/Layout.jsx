@@ -3,7 +3,7 @@ import { ThemeProvider, Grid } from "@material-ui/core";
 import theme from "./../theme";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "./Header";
-import FleetTable from "./FleetTable";
+import FleetTable from "./Table/FleetTable";
 
 const useStyles = makeStyles({
 	customHeader: {

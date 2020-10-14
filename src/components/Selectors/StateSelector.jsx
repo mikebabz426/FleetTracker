@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import {FormControl, Select } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import stateAbbreviations from "../services/usStates";
-import { TruckContext } from './../FleetContext';
+import stateAbbreviations from "../../services/usStates";
+import { TruckContext } from '../../FleetContext';
 import InputBase from '@material-ui/core/InputBase';
 
 

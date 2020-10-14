@@ -50,6 +50,68 @@ const stateAbbreviations = [
 	"WY",
 ];
 
+export const midwest = [
+	'IL',
+	'IN',
+	'WI',
+	'MI',
+	'OH',
+	'KY',
+	'MO',
+	'IA',
+	'MN',
+	'KS',
+	'NE',
+	'SD',
+	'ND',
+]
+export const east = [
+	'PA',
+	'WV',
+	'NY',
+	'MD',
+	'VA',
+	'DE',
+	'NJ',
+	'CT',
+	'MA',
+	'RI',
+	'VT',
+	'NH',
+	'ME',
+]
+
+export const southeast = [
+	'TN',
+	'NC',
+	'SC',
+	'GA',
+	'AL',
+	'MS',
+	'FL',
+]
+
+export const south = [
+	'AR',
+	'LA',
+	'OK',
+	'TX',
+]
+
+export const west = [
+	'NM',
+	'CO',
+	'WY',
+	'MT',
+	'ID',
+	'WA',
+	'OR',
+	'CA',
+	'NV',
+	'UT',
+	'AZ',
+]
+
 export const weekDays = [
 	'Mon',
 	'Tue',

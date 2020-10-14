@@ -1,11 +1,11 @@
 import React, {useContext} from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { TruckContext } from './../FleetContext';
-import StateSelector from "./StateSelector";
-import DaySelector from "./DaySelector";
-import ApptSelector from './ApptSelector';
-import StatusSelector from './StatusSelector';
+import { TruckContext } from '../../FleetContext';
+import StateSelector from "../Selectors/StateSelector";
+import DaySelector from "../Selectors/DaySelector";
+import ApptSelector from '../Selectors/ApptSelector';
+import StatusSelector from '../Selectors/StatusSelector';
 
 
 
@@ -191,9 +191,7 @@ const useStyles = makeStyles({
 	notes: {
 		backgroundColor: "#fff",
 	},
-	location: {
-		fontWeight: "bold",
-	},
+
 });
 
 
