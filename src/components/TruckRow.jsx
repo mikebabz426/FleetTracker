@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
-import StateSelector from "./StateSelector";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { TruckContext } from './../FleetContext';
+import StateSelector from "./StateSelector";
 import DaySelector from "./DaySelector";
 import ApptSelector from './ApptSelector';
 
@@ -38,6 +38,14 @@ const TruckRow = (props) => {
 						return [...updatedTrucks];
 					})
 						}
+	const handleTimeChange = (e) => {
+					const updatedTime = e.target.value;
+					const key = id;
+					setTrucks(trucks => {
+						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, time:updatedTime} : truck);
+						return [...updatedTrucks];
+					})
+						}
 
 	return (
 		<StyledTableRow key={id}>
@@ -50,11 +58,10 @@ const TruckRow = (props) => {
 			<StyledTableCell>{trailer}</StyledTableCell>
 			<StyledTableCell>{type}</StyledTableCell>
 			<StyledTableCell>
-				<TextField
+				<CustomLocationField
 					onChange={(e) => handleLocationChange(e)}
 					className={classes.location}
 					variant="outlined"
-					label="Location"
 					color="secondary"
 					size="small"
 					value={location}
@@ -64,13 +71,11 @@ const TruckRow = (props) => {
 				<StateSelector label="usState" st={usState} id={id} />
 			</StyledTableCell>
 			<StyledTableCell>
-				<TextField
-					className={classes.notes}
-					variant="outlined"
-					label="time"
-					color="secondary"
-					size="small"
-					value={time}
+				<CustomField 
+				value={time}
+				color='secondary' 
+				onChange={e => handleTimeChange(e) }
+				className={classes.inputCenter}
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
@@ -102,6 +107,29 @@ const TruckRow = (props) => {
 
 //Custom Component Styling
 
+const CustomField = withStyles({
+  root: {
+		width: 100,
+    '& .MuiInput-underline:after': {
+			borderBottomColor: '#66bb6a',
+			
+		},
+	},
+	
+})(TextField);
+
+const CustomLocationField = withStyles({
+  root: {
+		fontWeight: 'bold',
+		width: 160,
+    '& .MuiInput-underline:after': {
+			borderBottomColor: '#66bb6a',
+			
+		},
+	},
+	
+})(TextField);
+
 const StyledTableCell = withStyles((theme) => ({
 	head: {
 		backgroundColor: "#0257A2",
@@ -109,7 +137,7 @@ const StyledTableCell = withStyles((theme) => ({
 	},
 	body: {
 		fontSize: 14,
-		padding: ".2rem 1rem",
+		padding: ".2rem 1rem .2rem 1rem",
 	},
 }))(TableCell);
 
@@ -122,6 +150,15 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 const useStyles = makeStyles({
+	inputCenter: {
+		textAlign: 'center',
+		color: 'red',
+	},
+
+	location: {
+		fontWeight: 'bold',
+	},
+
 	table: {
 		minWidth: 700,
 	},

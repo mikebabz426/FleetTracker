@@ -1,8 +1,9 @@
 import React, {useContext} from "react";
-import { InputLabel, FormControl, Select } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import {FormControl, Select } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import stateAbbreviations from "../services/usStates";
 import { TruckContext } from './../FleetContext';
+import InputBase from '@material-ui/core/InputBase';
 
 
 const StateSelector = (props) => {
@@ -20,18 +21,13 @@ const StateSelector = (props) => {
 
 	return (
 		<FormControl variant="outlined" className={classes.formControl}>
-			<InputLabel htmlFor="outlined-age-native-simple">State</InputLabel>
 			<Select
-				autoWidth
-				size="small"
 				className={classes.selected}
 				native
 				value={props.st}
 				onChange={(e) => handleUsStateChange(e)}
 				label="State"
-				inputProps={{
-					name: "usState",
-				}}
+				input={<CustomInput/>}
 			>
 				<option aria-label="None" value="" />
 				{stateAbbreviations.map((st) => (
@@ -46,10 +42,29 @@ const StateSelector = (props) => {
 
 //Custom Component Styling
 
+const CustomInput = withStyles((theme) => ({
+
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: theme.palette.secondary,
+      boxShadow: `0 0 0 0.2rem rgba(102,187,106,.75)`,
+    },
+  },
+}))(InputBase);
+
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
-		minWidth: 120,
+		minWidth: 80,
 	},
 	selectEmpty: {
 		marginTop: theme.spacing(2),
