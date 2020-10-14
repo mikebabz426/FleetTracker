@@ -5,6 +5,7 @@ import { TruckContext } from './../FleetContext';
 import StateSelector from "./StateSelector";
 import DaySelector from "./DaySelector";
 import ApptSelector from './ApptSelector';
+import StatusSelector from './StatusSelector';
 
 
 
@@ -26,6 +27,7 @@ const TruckRow = (props) => {
 		usState,
 		time,
 		appt,
+		status,
 		needs,
 		notes,
 	} = props;
@@ -46,6 +48,24 @@ const TruckRow = (props) => {
 						return [...updatedTrucks];
 					})
 						}
+	const handleNeedsChange = (e) => {
+					const updatedNeeds = e.target.value;
+					const key = id;
+					setTrucks(trucks => {
+						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, needs:updatedNeeds} : truck);
+						return [...updatedTrucks];
+					})
+						}
+	const handleNotesChange = (e) => {
+					const updatedNotes = e.target.value;
+					const key = id;
+					setTrucks(trucks => {
+						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, notes:updatedNotes} : truck);
+						return [...updatedTrucks];
+					})
+						}
+
+						
 
 	return (
 		<StyledTableRow key={id}>
@@ -81,8 +101,13 @@ const TruckRow = (props) => {
 			<StyledTableCell>
 				<ApptSelector checked={appt} id={id}/>
 			</StyledTableCell>
+				<StyledTableCell>
+				<StatusSelector label="Status" st={status} id={id} />
+			</StyledTableCell>
+
 			<StyledTableCell>
 				<TextField
+					onChange={(e) => handleNeedsChange(e)}
 					className={classes.notes}
 					variant="outlined"
 					label="needs"
@@ -93,6 +118,7 @@ const TruckRow = (props) => {
 			</StyledTableCell>
 			<StyledTableCell>
 				<TextField
+				  onChange={(e)=> handleNotesChange(e)}
 					className={classes.notes}
 					variant="outlined"
 					label="notes"

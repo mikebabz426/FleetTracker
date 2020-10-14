@@ -18,6 +18,7 @@ export const TruckProvider = (props) => {
 			usState: "NC",
 			time: "00:00",
 			appt: false,
+			status: '',
 			needs: "",
 			notes: "",
 		},
@@ -33,6 +34,7 @@ export const TruckProvider = (props) => {
 			usState: "IA",
 			time: "09:30",
 			appt: false,
+			status: '',
 			needs: "",
 			notes: "",
 		},
@@ -48,7 +50,8 @@ export const TruckProvider = (props) => {
 			usState: "KY",
 			time: "08:00",
 			appt: true,
-			needs: "",
+
+status: '',			needs: "",
 			notes: "",
 		},
 		{
@@ -63,6 +66,7 @@ export const TruckProvider = (props) => {
 			usState: "WI",
 			time: "12:00",
 			appt: false,
+			status: '',
 			needs: "",
 			notes: "",
 		},
@@ -78,6 +82,7 @@ export const TruckProvider = (props) => {
 			usState: "IN",
 			time: "10:00",
 			appt: false,
+			status: '',
 			needs: "",
 			notes: "",
 		},
@@ -93,7 +98,8 @@ export const TruckProvider = (props) => {
 			usState: "GA",
 			time: "10:15",
 			appt: true,
-			needs: "",
+
+status: '',			needs: "",
 			notes: "",
 		},
 	]);
