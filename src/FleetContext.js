@@ -50,8 +50,8 @@ export const TruckProvider = (props) => {
 			usState: "KY",
 			time: "08:00",
 			appt: true,
-
-status: '',			needs: "",
+			status: '',			
+			needs: "",
 			notes: "",
 		},
 		{
@@ -98,8 +98,8 @@ status: '',			needs: "",
 			usState: "GA",
 			time: "10:15",
 			appt: true,
-
-status: '',			needs: "",
+			status: '',			
+			needs: "",
 			notes: "",
 		},
 	]);

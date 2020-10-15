@@ -11,7 +11,8 @@ import TruckRow from "./TruckRow";
 
 const FleetTable = () => {
 	const [trucks]  = useContext(TruckContext);
-
+	
+	
 	return (
 		<TableContainer component={Paper}>
 			<Table aria-label="customized table">
