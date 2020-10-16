@@ -21,6 +21,7 @@ export const TruckProvider = (props) => {
 			status: '',
 			needs: "",
 			notes: "",
+			team: "Team One",
 		},
 		{
 			id: uuidv4(),
@@ -37,6 +38,7 @@ export const TruckProvider = (props) => {
 			status: '',
 			needs: "",
 			notes: "",
+			team: "Team Two",
 		},
 		{
 			id: uuidv4(),
@@ -53,6 +55,7 @@ export const TruckProvider = (props) => {
 			status: '',			
 			needs: "",
 			notes: "",
+			team: "Team Three",
 		},
 		{
 			id: uuidv4(),
@@ -69,6 +72,7 @@ export const TruckProvider = (props) => {
 			status: '',
 			needs: "",
 			notes: "",
+			team: "Team Three",
 		},
 		{
 			id: uuidv4(),
@@ -85,6 +89,7 @@ export const TruckProvider = (props) => {
 			status: '',
 			needs: "",
 			notes: "",
+			team: "Team One",
 		},
 		{
 			id: uuidv4(),
@@ -101,6 +106,7 @@ export const TruckProvider = (props) => {
 			status: '',			
 			needs: "",
 			notes: "",
+			team: "Team Two",
 		},
 	]);
 

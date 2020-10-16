@@ -5,8 +5,8 @@ export const FilterContext = createContext();
 
 export const FilterProvider = (props) => {
 	const [filters, setFilters] = useState({
-    team: 'all',
-    day: 'Mon',
+    team: 'All',
+    day: 'All',
   })
 
 	return (

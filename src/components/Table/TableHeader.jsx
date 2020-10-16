@@ -14,22 +14,27 @@ const StyledTableCell = withStyles((theme) => ({
 }))(TableCell);
 
 const TableHeader = () => {
+	const headerNames = [
+		"Day",
+		"Cell Phone",
+		"Driver",
+		"Truck",
+		"Trailer",
+		"Type",
+		"Location",
+		"State",
+		"Time",
+		"Appt",
+		"Status",
+		"Needs",
+		"Notes",
+	];
 	return (
 		<TableHead>
 			<TableRow>
-				<StyledTableCell>Day</StyledTableCell>
-				<StyledTableCell>Cell Phone</StyledTableCell>
-				<StyledTableCell>Driver</StyledTableCell>
-				<StyledTableCell>Truck</StyledTableCell>
-				<StyledTableCell>Trailer</StyledTableCell>
-				<StyledTableCell>Type</StyledTableCell>
-				<StyledTableCell>Location</StyledTableCell>
-				<StyledTableCell>State</StyledTableCell>
-				<StyledTableCell>Time</StyledTableCell>
-				<StyledTableCell>Appt</StyledTableCell>
-				<StyledTableCell>Status</StyledTableCell>
-				<StyledTableCell>Needs</StyledTableCell>
-				<StyledTableCell>Notes</StyledTableCell>
+				{headerNames.map((header) => (
+					<StyledTableCell key={header}>{header}</StyledTableCell>
+				))}
 			</TableRow>
 		</TableHead>
 	);
