@@ -1,20 +1,16 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { TruckContext } from '../../FleetContext';
-import StateSelector from "../Selectors/StateSelector";
-import DaySelector from "../Selectors/DaySelector";
-import ApptSelector from '../Selectors/ApptSelector';
-import StatusSelector from '../Selectors/StatusSelector';
-
-
-
+import { TruckContext } from "../../FleetContext";
+// import StateSelector from "../Selectors/StateSelector";
+import ApptSelector from "../Selectors/ApptSelector";
+import StatusSelector from "../Selectors/StatusSelector";
+import Selector from "./../Selectors/Selector";
 
 const TruckRow = (props) => {
 	const classes = useStyles();
-	const [, setTrucks]  = useContext(TruckContext);
-	
-	
+	const [, setTrucks] = useContext(TruckContext);
+
 	const {
 		id,
 		day,
@@ -33,44 +29,50 @@ const TruckRow = (props) => {
 	} = props;
 
 	const handleLocationChange = (e) => {
-					const updatedLocation = e.target.value;
-					const key = id;
-					setTrucks(trucks => {
-						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, location:updatedLocation} : truck);
-						return [...updatedTrucks];
-					})
-						}
+		const updatedLocation = e.target.value;
+		const key = id;
+		setTrucks((trucks) => {
+			let updatedTrucks = trucks.map((truck) =>
+				truck.id === key ? { ...truck, location: updatedLocation } : truck
+			);
+			return [...updatedTrucks];
+		});
+	};
 	const handleTimeChange = (e) => {
-					const updatedTime = e.target.value;
-					const key = id;
-					setTrucks(trucks => {
-						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, time:updatedTime} : truck);
-						return [...updatedTrucks];
-					})
-						}
+		const updatedTime = e.target.value;
+		const key = id;
+		setTrucks((trucks) => {
+			let updatedTrucks = trucks.map((truck) =>
+				truck.id === key ? { ...truck, time: updatedTime } : truck
+			);
+			return [...updatedTrucks];
+		});
+	};
 	const handleNeedsChange = (e) => {
-					const updatedNeeds = e.target.value;
-					const key = id;
-					setTrucks(trucks => {
-						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, needs:updatedNeeds} : truck);
-						return [...updatedTrucks];
-					})
-						}
+		const updatedNeeds = e.target.value;
+		const key = id;
+		setTrucks((trucks) => {
+			let updatedTrucks = trucks.map((truck) =>
+				truck.id === key ? { ...truck, needs: updatedNeeds } : truck
+			);
+			return [...updatedTrucks];
+		});
+	};
 	const handleNotesChange = (e) => {
-					const updatedNotes = e.target.value;
-					const key = id;
-					setTrucks(trucks => {
-						let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, notes:updatedNotes} : truck);
-						return [...updatedTrucks];
-					})
-						}
-
-						
+		const updatedNotes = e.target.value;
+		const key = id;
+		setTrucks((trucks) => {
+			let updatedTrucks = trucks.map((truck) =>
+				truck.id === key ? { ...truck, notes: updatedNotes } : truck
+			);
+			return [...updatedTrucks];
+		});
+	};
 
 	return (
 		<StyledTableRow key={id}>
 			<StyledTableCell>
-				<DaySelector day={day} label='day' id={id} />
+				<Selector type="day" val={day} id={id} />
 			</StyledTableCell>
 			<StyledTableCell>{cell}</StyledTableCell>
 			<StyledTableCell>{driver}</StyledTableCell>
@@ -88,20 +90,20 @@ const TruckRow = (props) => {
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
-				<StateSelector label="usState" st={usState} id={id} />
+				<Selector type="state" val={usState} id={id} />
 			</StyledTableCell>
 			<StyledTableCell>
-				<CustomField 
-				value={time}
-				color='secondary' 
-				onChange={e => handleTimeChange(e) }
-				className={classes.inputCenter}
+				<CustomField
+					value={time}
+					color="secondary"
+					onChange={(e) => handleTimeChange(e)}
+					className={classes.inputCenter}
 				/>
 			</StyledTableCell>
 			<StyledTableCell>
-				<ApptSelector checked={appt} id={id}/>
+				<ApptSelector checked={appt} id={id} />
 			</StyledTableCell>
-				<StyledTableCell>
+			<StyledTableCell>
 				<StatusSelector label="Status" st={status} id={id} />
 			</StyledTableCell>
 
@@ -118,7 +120,7 @@ const TruckRow = (props) => {
 			</StyledTableCell>
 			<StyledTableCell>
 				<TextField
-				  onChange={(e)=> handleNotesChange(e)}
+					onChange={(e) => handleNotesChange(e)}
 					className={classes.notes}
 					variant="outlined"
 					label="notes"
@@ -134,26 +136,22 @@ const TruckRow = (props) => {
 //Custom Component Styling
 
 const CustomField = withStyles({
-  root: {
+	root: {
 		width: 100,
-    '& .MuiInput-underline:after': {
-			borderBottomColor: '#66bb6a',
-			
+		"& .MuiInput-underline:after": {
+			borderBottomColor: "#66bb6a",
 		},
 	},
-	
 })(TextField);
 
 const CustomLocationField = withStyles({
-  root: {
-		fontWeight: 'bold',
+	root: {
+		fontWeight: "bold",
 		width: 160,
-    '& .MuiInput-underline:after': {
-			borderBottomColor: '#66bb6a',
-			
+		"& .MuiInput-underline:after": {
+			borderBottomColor: "#66bb6a",
 		},
 	},
-	
 })(TextField);
 
 const StyledTableCell = withStyles((theme) => ({
@@ -177,12 +175,12 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
 	inputCenter: {
-		textAlign: 'center',
-		color: 'red',
+		textAlign: "center",
+		color: "red",
 	},
 
 	location: {
-		fontWeight: 'bold',
+		fontWeight: "bold",
 	},
 
 	table: {
@@ -191,9 +189,6 @@ const useStyles = makeStyles({
 	notes: {
 		backgroundColor: "#fff",
 	},
-
 });
-
-
 
 export default TruckRow;

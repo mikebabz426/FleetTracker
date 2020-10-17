@@ -1,4 +1,4 @@
-const stateAbbreviations = [
+export const states = [
 	"AL",
 	"AZ",
 	"AR",
@@ -122,6 +122,15 @@ export const weekDays = [
 	'Sun',
 ]
 
+export const truckStatus = [
+	'None',
+	'Parked',
+	'Enroute',
+	'On-Site',
+	'Unloading',
+	'Empty'
+]
 
 
-export default stateAbbreviations;
+export default states;
+

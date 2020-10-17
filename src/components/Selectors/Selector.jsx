@@ -1,21 +1,36 @@
 import React, { useContext } from "react";
+import { TruckContext } from "./../../FleetContext";
 import { FormControl, Select } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import states from "../../services/services";
-import { TruckContext } from "../../FleetContext";
 import InputBase from "@material-ui/core/InputBase";
+import { weekDays, states, truckStatus } from "./../../services/services";
 
-const StateSelector = (props) => {
+const Selector = (props) => {
 	const classes = useStyles();
-	const [, setTrucks] = useContext(TruckContext);
 
-	const handleUsStateChange = (e) => {
-		const updatedUsState = e.target.value;
-		const key = props.id;
+	const [, setTrucks] = useContext(TruckContext);
+	const { id, type, val } = props;
+	const arr =
+		type === "day" ? weekDays : type === "status" ? truckStatus : states;
+
+	const handleChange = (e, id) => {
+		debugger;
+		const key = id;
+		let updatedVal = e.target.value;
+		let banana = type;
+
 		setTrucks((trucks) => {
-			let updatedTrucks = trucks.map((truck) =>
-				truck.id === key ? { ...truck, usState: updatedUsState } : truck
-			);
+			let updatedTrucks = trucks.map((truck) => {
+				if (banana === "day") {
+					return truck.id === key ? { ...truck, day: updatedVal } : truck;
+				} else if (banana === "state") {
+					return truck.id === key ? { ...truck, usState: updatedVal } : truck;
+				} else if (banana === "status") {
+					return truck.id === key ? { ...truck, status: updatedVal } : truck;
+				} else {
+					return null;
+				}
+			});
 			return [...updatedTrucks];
 		});
 	};
@@ -25,15 +40,15 @@ const StateSelector = (props) => {
 			<Select
 				className={classes.selected}
 				native
-				value={props.st}
-				onChange={(e) => handleUsStateChange(e)}
-				label="State"
+				value={val}
+				label={type}
+				onChange={(e) => handleChange(e, id)}
 				input={<CustomInput />}
 			>
-				<option aria-label="None" value="" />
-				{states.map((st) => (
-					<option aria-label={st} className={classes.selected} key={st}>
-						{st}
+				<option className={classes.selected} aria-label="None" value="" />
+				{arr.map((opt) => (
+					<option aria-label={opt} key={opt} className={classes.selected}>
+						{opt}
 					</option>
 				))}
 			</Select>
@@ -74,4 +89,4 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default StateSelector;
+export default Selector;

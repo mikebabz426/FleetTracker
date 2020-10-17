@@ -1,10 +1,9 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { FormControl, Select } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import {weekDays} from "../../services/usStates";
-import { TruckContext } from '../../FleetContext';
-import InputBase from '@material-ui/core/InputBase';
-
+import { weekDays } from "../../services/services";
+import { TruckContext } from "../../FleetContext";
+import InputBase from "@material-ui/core/InputBase";
 
 const DaySelector = (props) => {
 	const classes = useStyles();
@@ -12,13 +11,15 @@ const DaySelector = (props) => {
 
 	const handleDayChange = (e) => {
 		const key = props.id;
-		let updatedDay = e.target.value
-		
-		setTrucks(trucks => {
-			let updatedTrucks = trucks.map(truck => truck.id === key ? {...truck, day:updatedDay} : truck);
-			return [...updatedTrucks]
-		})
-	}
+		let updatedDay = e.target.value;
+
+		setTrucks((trucks) => {
+			let updatedTrucks = trucks.map((truck) =>
+				truck.id === key ? { ...truck, day: updatedDay } : truck
+			);
+			return [...updatedTrucks];
+		});
+	};
 
 	return (
 		<FormControl variant="outlined" className={classes.formControl}>
@@ -28,7 +29,7 @@ const DaySelector = (props) => {
 				value={props.day}
 				label="Day"
 				onChange={(e) => handleDayChange(e)}
-				input={<CustomInput/>}
+				input={<CustomInput />}
 			>
 				<option aria-label="None" value="" />
 				{weekDays.map((day) => (
@@ -44,22 +45,21 @@ const DaySelector = (props) => {
 //Custom Component Styling
 
 const CustomInput = withStyles((theme) => ({
-	
-  input: {
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
-    fontSize: 16,
-    padding: '10px 26px 10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: theme.palette.secondary,
-      boxShadow: `0 0 0 0.2rem rgba(102,187,106,.75)`,
-    },
-  },
+	input: {
+		borderRadius: 4,
+		position: "relative",
+		backgroundColor: theme.palette.background.paper,
+		border: "1px solid #ced4da",
+		fontSize: 16,
+		padding: "10px 26px 10px 12px",
+		transition: theme.transitions.create(["border-color", "box-shadow"]),
+
+		"&:focus": {
+			borderRadius: 4,
+			borderColor: theme.palette.secondary,
+			boxShadow: `0 0 0 0.2rem rgba(102,187,106,.75)`,
+		},
+	},
 }))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
