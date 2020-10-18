@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.9.4",
     "react-scripts": "3.4.3",
     "react-simple-timefield": "^3.2.3",
     "uuid": "^8.3.1"

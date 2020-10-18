@@ -3,6 +3,8 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Filter from "./Selectors/Filter";
 import { FilterContext } from "./../FilterContext";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles(() => ({
 	typographyStyles: {
@@ -10,6 +12,15 @@ const useStyles = makeStyles(() => ({
 	},
 	toolbar: {
 		justifyContent: "space-between",
+	},
+	fab: {
+		backgroundColor: "#fff",
+		color: "#66bb6a",
+		fontWeight: "bold",
+		"&:hover": {
+			color: "#fff",
+			backgroundColor: "#66bb6a",
+		},
 	},
 }));
 
@@ -41,6 +52,14 @@ const Header = () => {
 					options={dayOptions}
 					handler={(e) => handleChange(e, "day")}
 				/>
+				<Fab
+					className={classes.fab}
+					size="small"
+					color="primary"
+					aria-label="add"
+				>
+					<AddIcon />
+				</Fab>
 			</Toolbar>
 		</AppBar>
 	);

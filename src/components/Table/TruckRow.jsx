@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { TruckContext } from "../../FleetContext";
-// import StateSelector from "../Selectors/StateSelector";
-import ApptSelector from "../Selectors/ApptSelector";
-import StatusSelector from "../Selectors/StatusSelector";
+import ApptSelector from "../Selectors/ApptToggle";
 import Selector from "./../Selectors/Selector";
 
 const TruckRow = (props) => {
@@ -104,7 +102,7 @@ const TruckRow = (props) => {
 				<ApptSelector checked={appt} id={id} />
 			</StyledTableCell>
 			<StyledTableCell>
-				<StatusSelector label="Status" st={status} id={id} />
+				<Selector type="status" val={status} id={id} />
 			</StyledTableCell>
 
 			<StyledTableCell>
