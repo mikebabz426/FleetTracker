@@ -7,15 +7,9 @@ import {
 	TextField,
 	Button,
 	Avatar,
-	CssBaseline,
-	FormControlLabel,
-	Checkbox,
-	Link,
-	Grid,
-	Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
@@ -30,11 +24,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main,
+		backgroundColor: theme.palette.primary.main,
 	},
 	form: {
 		width: "100%", // Fix IE 11 issue.
 		marginTop: theme.spacing(1),
+		marginBottom: "3rem",
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
@@ -49,13 +44,12 @@ const AddTruckForm = (props) => {
 	return (
 		<Backdrop className={classes.backdrop} open={props.open}>
 			<Container component="main" maxWidth="xs" className={classes.container}>
-				<CssBaseline />
 				<div className={classes.paper}>
 					<Avatar className={classes.avatar}>
-						<LockOutlinedIcon />
+						<LocalShippingIcon />
 					</Avatar>
 					<Typography component="h1" variant="h5">
-						Sign in
+						Add Driver
 					</Typography>
 					<form className={classes.form} noValidate onSubmit={handleSubmit}>
 						<TextField
@@ -63,10 +57,9 @@ const AddTruckForm = (props) => {
 							margin="normal"
 							required
 							fullWidth
-							id="email"
-							label="Email Address"
-							name="email"
-							autoComplete="email"
+							name="name"
+							label="name"
+							id="name"
 							autoFocus
 							inputRef={register}
 						/>
@@ -75,16 +68,30 @@ const AddTruckForm = (props) => {
 							margin="normal"
 							required
 							fullWidth
-							name="password"
-							label="Password"
-							type="password"
-							id="password"
-							autoComplete="current-password"
+							name="phone number"
+							label="phone number"
+							id="phone-number"
 							inputRef={register}
 						/>
-						<FormControlLabel
-							control={<Checkbox value="remember" color="primary" />}
-							label="Remember me"
+						<TextField
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							name="truck"
+							label="truck"
+							id="truck"
+							inputRef={register}
+						/>
+						<TextField
+							variant="outlined"
+							margin="normal"
+							required
+							fullWidth
+							name="trailer"
+							label="trailer"
+							id="trailer"
+							inputRef={register}
 						/>
 						<Button
 							type="submit"
@@ -92,26 +99,12 @@ const AddTruckForm = (props) => {
 							variant="contained"
 							color="primary"
 							className={classes.submit}
-							inputRef={register}
 							onSubmit={onSubmit}
 						>
-							Sign In
+							Add New Driver
 						</Button>
-						<Grid container>
-							<Grid item xs>
-								<Link href="#" variant="body2">
-									Forgot password?
-								</Link>
-							</Grid>
-							<Grid item>
-								<Link href="#" variant="body2">
-									{"Don't have an account? Sign Up"}
-								</Link>
-							</Grid>
-						</Grid>
 					</form>
 				</div>
-				<Box mt={8}>Copyright = Mr. Babz</Box>
 			</Container>
 		</Backdrop>
 	);
