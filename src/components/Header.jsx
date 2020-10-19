@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
 	},
 }));
 
-const Header = () => {
+const Header = (props) => {
 	const [filters, setFilters] = useContext(FilterContext);
 	const classes = useStyles();
 	const teamOptions = ["All", "Team One", "Team Two", "Team Three"];
@@ -53,6 +53,7 @@ const Header = () => {
 					handler={(e) => handleChange(e, "day")}
 				/>
 				<Fab
+					onClick={props.toggler}
 					className={classes.fab}
 					size="small"
 					color="primary"

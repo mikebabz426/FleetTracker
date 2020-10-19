@@ -31,6 +31,7 @@ const FleetTable = () => {
 		<TableContainer component={Paper}>
 			<Table aria-label="customized table">
 				<TableHeader />
+
 				<TableBody>{filteredTrucks}</TableBody>
 			</Table>
 		</TableContainer>

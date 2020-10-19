@@ -14,7 +14,6 @@ const Selector = (props) => {
 		type === "day" ? weekDays : type === "status" ? truckStatus : states;
 
 	const handleChange = (e, id) => {
-		debugger;
 		const key = id;
 		let updatedVal = e.target.value;
 		let banana = type;
