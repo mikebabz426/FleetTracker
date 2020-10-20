@@ -29,6 +29,7 @@ const TruckRow = (props) => {
 	const handleLocationChange = (e) => {
 		const updatedLocation = e.target.value;
 		const key = id;
+
 		setTrucks((trucks) => {
 			let updatedTrucks = trucks.map((truck) =>
 				truck.id === key ? { ...truck, location: updatedLocation } : truck
@@ -82,6 +83,7 @@ const TruckRow = (props) => {
 					onChange={(e) => handleLocationChange(e)}
 					className={classes.location}
 					variant="outlined"
+					name="location"
 					color="secondary"
 					size="small"
 					value={location}

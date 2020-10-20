@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import {
 	Container,
 	Typography,
@@ -7,23 +6,24 @@ import {
 	TextField,
 	Button,
 	Avatar,
+	FormLabel,
+	Radio,
+	RadioGroup,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const useStyles = makeStyles((theme) => ({
-	paper: {
-		marginTop: theme.spacing(8),
+	container: {
+		backgroundColor: "#fff",
+		borderRadius: "3px",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
 	},
-	container: {
-		backgroundColor: "#fff",
-		borderRadius: "3px",
-	},
 	avatar: {
-		margin: theme.spacing(1),
+		margin: theme.spacing(4, 0, 2, 0),
 		backgroundColor: theme.palette.primary.main,
 	},
 	form: {
@@ -34,79 +34,123 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
+	radioGroup: {
+		margin: theme.spacing(3, 0, 1, 0),
+	},
 }));
+
+// const CustomInput = (props) => {
+// 	return <TextField {...props} />;
+// };
 
 const AddTruckForm = (props) => {
 	const classes = useStyles();
-	const { register, handleSubmit } = useForm();
-	const onSubmit = (data) => console.log(data);
 
 	return (
-		<Backdrop className={classes.backdrop} open={props.open}>
-			<Container component="main" maxWidth="xs" className={classes.container}>
-				<div className={classes.paper}>
-					<Avatar className={classes.avatar}>
-						<LocalShippingIcon />
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Add Driver
-					</Typography>
-					<form className={classes.form} noValidate onSubmit={handleSubmit}>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="name"
-							label="name"
-							id="name"
-							autoFocus
-							inputRef={register}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="phone number"
-							label="phone number"
-							id="phone-number"
-							inputRef={register}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="truck"
-							label="truck"
-							id="truck"
-							inputRef={register}
-						/>
-						<TextField
-							variant="outlined"
-							margin="normal"
-							required
-							fullWidth
-							name="trailer"
-							label="trailer"
-							id="trailer"
-							inputRef={register}
-						/>
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							color="primary"
-							className={classes.submit}
-							onSubmit={onSubmit}
-						>
-							Add New Driver
-						</Button>
-					</form>
-				</div>
-			</Container>
-		</Backdrop>
+		// <Backdrop className={classes.backdrop} open={props.open}>
+		<Container component="main" maxWidth="xs" className={classes.container}>
+			<Avatar className={classes.avatar}>
+				<LocalShippingIcon />
+			</Avatar>
+			<Typography component="h1" variant="h5">
+				Add Driver
+			</Typography>
+			<Formik
+				initialValues={{
+					driverName: "",
+					phoneNumber: "",
+					truckNumber: "",
+					trailerNumber: "",
+					trailerType: "",
+				}}
+				onSubmit={(values) => {
+					console.log("Submit Data: ", values);
+				}}
+			>
+				{({ values, handleChange, handleBlur, handleSubmit, isSubmitting }) => {
+					return (
+						<Form onSubmit={handleSubmit}>
+							<Field
+								name="driverName"
+								type="input"
+								variant="outlined"
+								margin="normal"
+								label="Driver Name"
+								required
+								fullWidth
+								as={TextField}
+							/>
+							<Field
+								name="phoneNumber"
+								type="input"
+								variant="outlined"
+								margin="normal"
+								label="Phone Number"
+								required
+								fullWidth
+								as={TextField}
+							/>
+							<Field
+								name="truckNumber"
+								type="input"
+								variant="outlined"
+								margin="normal"
+								label="Truck Number"
+								required
+								fullWidth
+								as={TextField}
+							/>
+							<Field
+								name="trailerNumber"
+								type="input"
+								variant="outlined"
+								margin="normal"
+								label="Trailer Number"
+								required
+								fullWidth
+								as={TextField}
+							/>
+							<RadioGroup
+								aria-label="Trailer Type"
+								className={classes.radioGroup}
+							>
+								<label>
+									<Field
+										value="53 Van"
+										name="trailerType"
+										type="radio"
+										label="53 Van"
+										as={Radio}
+									/>
+									53' Van
+								</label>
+								<label>
+									<Field
+										value="53 Reefer"
+										name="trailerType"
+										type="radio"
+										label="53 Reefer"
+										as={Radio}
+									/>
+									53' Reefer
+								</label>
+							</RadioGroup>
+
+							<Button
+								type="submit"
+								fullWidth
+								variant="contained"
+								color="primary"
+								className={classes.submit}
+							>
+								Add New Driver
+							</Button>
+						</Form>
+					);
+				}}
+			</Formik>
+		</Container>
+		// </Backdrop>
 	);
 };
 
