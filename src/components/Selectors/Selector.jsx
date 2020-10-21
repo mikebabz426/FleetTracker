@@ -16,15 +16,15 @@ const Selector = (props) => {
 	const handleChange = (e, id) => {
 		const key = id;
 		let updatedVal = e.target.value;
-		let banana = type;
+		let selectorType = type;
 
 		setTrucks((trucks) => {
 			let updatedTrucks = trucks.map((truck) => {
-				if (banana === "day") {
+				if (selectorType === "day") {
 					return truck.id === key ? { ...truck, day: updatedVal } : truck;
-				} else if (banana === "state") {
+				} else if (selectorType === "state") {
 					return truck.id === key ? { ...truck, usState: updatedVal } : truck;
-				} else if (banana === "status") {
+				} else if (selectorType === "status") {
 					return truck.id === key ? { ...truck, status: updatedVal } : truck;
 				} else {
 					return null;
