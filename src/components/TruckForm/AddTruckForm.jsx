@@ -12,8 +12,35 @@ import { makeStyles } from "@material-ui/core/styles";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import { Formik, Form, Field, useField } from "formik";
 import * as Yup from "yup";
+import { gql, useMutation } from "@apollo/client";
 
-//Validation:
+//GQL Mutation
+
+const ADD_DRIVER = gql`
+	mutation MyMutation(
+		$driver: String!
+		$truck: Int!
+		$trailer: Int!
+		$cell: String!
+		$type: String!
+		$team: String!
+	) {
+		insert_fleet_table_one(
+			object: {
+				driver: $driver
+				truck: $truck
+				trailer: $trailer
+				cell: $cell
+				type: $type
+				team: $team
+			}
+		) {
+			id
+		}
+	}
+`;
+
+//Form Validation:
 
 let truckSchema = Yup.object().shape({
 	driverName: Yup.string().required().min(3),
@@ -34,6 +61,7 @@ const CustomRadio = ({ label, ...props }) => {
 
 const AddTruckForm = (props) => {
 	const classes = useStyles();
+	const [addDriver] = useMutation(ADD_DRIVER);
 
 	return (
 		<Container component="main" maxWidth="xs" className={classes.container}>
@@ -53,7 +81,16 @@ const AddTruckForm = (props) => {
 				}}
 				validationSchema={truckSchema}
 				onSubmit={(values) => {
-					console.log("Submit Data: ", values);
+					addDriver({
+						variables: {
+							driver: values.driverName,
+							truck: values.truckNumber,
+							trailer: values.trailerNumber,
+							cell: values.phoneNumber,
+							team: "Team One",
+							type: values.trailerType,
+						},
+					});
 				}}
 			>
 				{({ handleSubmit, errors, touched }) => {

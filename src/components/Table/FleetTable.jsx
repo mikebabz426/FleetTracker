@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { FilterContext } from "../../FilterContext";
-import Paper from "@material-ui/core/Paper";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
+import {
+	Paper,
+	TableContainer,
+	Table,
+	TableBody,
+	CircularProgress,
+} from "@material-ui/core";
 import TableHeader from "./TableHeader";
 import TruckRow from "./TruckRow";
 
@@ -35,7 +38,7 @@ const FleetTable = () => {
 
 	const { loading, error, data } = useQuery(FLEET_ALL);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <CircularProgress />;
 	if (error) return <p>Error :(</p>;
 
 	const { fleet_table: trucks } = data;
