@@ -1,13 +1,22 @@
-import React, { useContext } from "react";
+import React from "react";
 import { TextField, TableCell, TableRow } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import { TruckContext } from "../../FleetContext";
 import ApptSelector from "../Selectors/ApptToggle";
 import Selector from "./../Selectors/Selector";
+import { Formik, Field } from "formik";
+
+// const UPDATE_FIELD = gql`
+// 	mutation Update($id: uuid!, $notes: String!) {
+// 		update_fleet_table_by_pk(pk_columns: { id: $id }, _set: { notes: $notes }) {
+// 			id
+// 			notes
+// 		}
+// 	}
+// `;
 
 const TruckRow = (props) => {
 	const classes = useStyles();
-	const [, setTrucks] = useContext(TruckContext);
+	// const [updateTruck] = useMutation(UPDATE_FIELD);
 
 	const {
 		id,
@@ -26,110 +35,109 @@ const TruckRow = (props) => {
 		notes,
 	} = props;
 
-	const handleLocationChange = (e) => {
-		const updatedLocation = e.target.value;
-		const key = id;
-
-		setTrucks((trucks) => {
-			let updatedTrucks = trucks.map((truck) =>
-				truck.id === key ? { ...truck, location: updatedLocation } : truck
-			);
-			return [...updatedTrucks];
-		});
-	};
-	const handleTimeChange = (e) => {
-		const updatedTime = e.target.value;
-		const key = id;
-		setTrucks((trucks) => {
-			let updatedTrucks = trucks.map((truck) =>
-				truck.id === key ? { ...truck, time: updatedTime } : truck
-			);
-			return [...updatedTrucks];
-		});
-	};
-	const handleNeedsChange = (e) => {
-		const updatedNeeds = e.target.value;
-		const key = id;
-		setTrucks((trucks) => {
-			let updatedTrucks = trucks.map((truck) =>
-				truck.id === key ? { ...truck, needs: updatedNeeds } : truck
-			);
-			return [...updatedTrucks];
-		});
-	};
-	const handleNotesChange = (e) => {
-		const updatedNotes = e.target.value;
-		const key = id;
-		setTrucks((trucks) => {
-			let updatedTrucks = trucks.map((truck) =>
-				truck.id === key ? { ...truck, notes: updatedNotes } : truck
-			);
-			return [...updatedTrucks];
-		});
-	};
-
 	return (
-		<StyledTableRow key={id}>
-			<StyledTableCell>
-				<Selector type="day" val={day} id={id} />
-			</StyledTableCell>
-			<StyledTableCell>{cell}</StyledTableCell>
-			<StyledTableCell>{driver}</StyledTableCell>
-			<StyledTableCell>{truck}</StyledTableCell>
-			<StyledTableCell>{trailer}</StyledTableCell>
-			<StyledTableCell>{type}</StyledTableCell>
-			<StyledTableCell>
-				<CustomLocationField
-					onChange={(e) => handleLocationChange(e)}
-					className={classes.location}
-					variant="outlined"
-					name="location"
-					color="secondary"
-					size="small"
-					value={location}
-				/>
-			</StyledTableCell>
-			<StyledTableCell>
-				<Selector type="state" val={usState} id={id} />
-			</StyledTableCell>
-			<StyledTableCell>
-				<CustomField
-					value={time}
-					color="secondary"
-					onChange={(e) => handleTimeChange(e)}
-					className={classes.inputCenter}
-				/>
-			</StyledTableCell>
-			<StyledTableCell>
-				<ApptSelector checked={appt} id={id} />
-			</StyledTableCell>
-			<StyledTableCell>
-				<Selector type="status" val={status} id={id} />
-			</StyledTableCell>
-
-			<StyledTableCell>
-				<TextField
-					onChange={(e) => handleNeedsChange(e)}
-					className={classes.notes}
-					variant="outlined"
-					label="needs"
-					color="secondary"
-					size="small"
-					value={needs}
-				/>
-			</StyledTableCell>
-			<StyledTableCell>
-				<TextField
-					onChange={(e) => handleNotesChange(e)}
-					className={classes.notes}
-					variant="outlined"
-					label="notes"
-					color="secondary"
-					size="small"
-					value={notes}
-				/>
-			</StyledTableCell>
-		</StyledTableRow>
+		<Formik
+			initialValues={{
+				id: id,
+				day: day,
+				location: location,
+				usState: usState,
+				time: time,
+				status: status,
+				needs: needs,
+				notes: notes,
+			}}
+			// onSubmit={(values) => {
+			// 	updateDriver({
+			// 		variables: {
+			// 			location: values.location,
+			// 			time: values.time,
+			// 			needs: values.needs,
+			// 			notes: values.notes,
+			// 		},
+			// 	});
+			// }}
+		>
+			{({ values }) => {
+				console.log(values);
+				return (
+					<StyledTableRow key={id}>
+						<StyledTableCell>
+							<Field as={Selector} type="day" val={values.day} name="day" />
+						</StyledTableCell>
+						<StyledTableCell>{cell}</StyledTableCell>
+						<StyledTableCell>{driver}</StyledTableCell>
+						<StyledTableCell>{truck}</StyledTableCell>
+						<StyledTableCell>{trailer}</StyledTableCell>
+						<StyledTableCell>{type}</StyledTableCell>
+						<StyledTableCell>
+							<Field
+								name="location"
+								type="input"
+								size="small"
+								color="secondary"
+								variant="outlined"
+								className={classes.location}
+								as={CustomLocationField}
+							/>
+						</StyledTableCell>
+						<StyledTableCell>
+							<Field
+								as={Selector}
+								type="usState"
+								name="usState"
+								val={values.usState}
+							/>
+						</StyledTableCell>
+						<StyledTableCell>
+							<Field
+								name="time"
+								type="input"
+								size="small"
+								color="secondary"
+								className={classes.inputCenter}
+								as={CustomField}
+							/>
+						</StyledTableCell>
+						<StyledTableCell>
+							<ApptSelector checked={appt} id={id} />
+						</StyledTableCell>
+						<StyledTableCell>
+							<Field
+								as={Selector}
+								type="status"
+								name="status"
+								val={values.status}
+							/>
+						</StyledTableCell>
+						<StyledTableCell>
+							<Field
+								name="needs"
+								label="Needs"
+								type="input"
+								variant="outlined"
+								size="small"
+								color="secondary"
+								className={classes.notes}
+								as={TextField}
+							/>
+						</StyledTableCell>
+						<StyledTableCell>
+							<Field
+								name="notes"
+								label="Notes"
+								type="input"
+								variant="outlined"
+								size="small"
+								color="secondary"
+								className={classes.notes}
+								as={TextField}
+							/>
+						</StyledTableCell>
+					</StyledTableRow>
+				);
+			}}
+		</Formik>
 	);
 };
 

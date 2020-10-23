@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { TruckContext } from "./../../FleetContext";
+import React from "react";
 import { FormControl, Select } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
@@ -8,31 +7,9 @@ import { weekDays, states, truckStatus } from "./../../services/services";
 const Selector = (props) => {
 	const classes = useStyles();
 
-	const [, setTrucks] = useContext(TruckContext);
-	const { id, type, val } = props;
+	const { type, name, val } = props;
 	const arr =
 		type === "day" ? weekDays : type === "status" ? truckStatus : states;
-
-	const handleChange = (e, id) => {
-		const key = id;
-		let updatedVal = e.target.value;
-		let selectorType = type;
-
-		setTrucks((trucks) => {
-			let updatedTrucks = trucks.map((truck) => {
-				if (selectorType === "day") {
-					return truck.id === key ? { ...truck, day: updatedVal } : truck;
-				} else if (selectorType === "state") {
-					return truck.id === key ? { ...truck, usState: updatedVal } : truck;
-				} else if (selectorType === "status") {
-					return truck.id === key ? { ...truck, status: updatedVal } : truck;
-				} else {
-					return null;
-				}
-			});
-			return [...updatedTrucks];
-		});
-	};
 
 	return (
 		<FormControl variant="outlined" className={classes.formControl}>
@@ -40,11 +17,11 @@ const Selector = (props) => {
 				className={classes.selected}
 				native
 				value={val}
+				name={name}
 				label={type}
-				onChange={(e) => handleChange(e, id)}
 				input={<CustomInput />}
 			>
-				<option className={classes.selected} aria-label="None" value="" />
+				<option className={classes.selected} aria-label="None" />
 				{arr.map((opt) => (
 					<option aria-label={opt} key={opt} className={classes.selected}>
 						{opt}
