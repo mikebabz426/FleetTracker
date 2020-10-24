@@ -63,7 +63,7 @@ const TruckRow = (props) => {
 				return (
 					<StyledTableRow key={id}>
 						<StyledTableCell>
-							<Field as={Selector} type="day" val={values.day} name="day" />
+							<Field as={Selector} name="day" />
 						</StyledTableCell>
 						<StyledTableCell>{cell}</StyledTableCell>
 						<StyledTableCell>{driver}</StyledTableCell>
@@ -82,12 +82,7 @@ const TruckRow = (props) => {
 							/>
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field
-								as={Selector}
-								type="usState"
-								name="usState"
-								val={values.usState}
-							/>
+							<Field as={Selector} name="usState" />
 						</StyledTableCell>
 						<StyledTableCell>
 							<Field
@@ -103,12 +98,7 @@ const TruckRow = (props) => {
 							<ApptSelector checked={appt} id={id} />
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field
-								as={Selector}
-								type="status"
-								name="status"
-								val={values.status}
-							/>
+							<Field as={Selector} name="status" />
 						</StyledTableCell>
 						<StyledTableCell>
 							<Field

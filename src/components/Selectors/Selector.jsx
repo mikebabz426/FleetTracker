@@ -6,24 +6,30 @@ import { weekDays, states, truckStatus } from "./../../services/services";
 
 const Selector = (props) => {
 	const classes = useStyles();
+	debugger;
+	console.log(props);
+	const { name } = props;
 
-	const { type, name, val } = props;
 	const arr =
-		type === "day" ? weekDays : type === "status" ? truckStatus : states;
-
+		name === "day" ? weekDays : name === "status" ? truckStatus : states;
+	console.log(arr);
 	return (
 		<FormControl variant="outlined" className={classes.formControl}>
 			<Select
 				className={classes.selected}
 				native
-				value={val}
 				name={name}
-				label={type}
+				label={name}
 				input={<CustomInput />}
+				value={props.value}
 			>
-				<option className={classes.selected} aria-label="None" />
 				{arr.map((opt) => (
-					<option aria-label={opt} key={opt} className={classes.selected}>
+					<option
+						aria-label={opt}
+						key={opt}
+						className={classes.selected}
+						value={opt}
+					>
 						{opt}
 					</option>
 				))}

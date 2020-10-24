@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "./components/Layout";
-import { TruckProvider } from "./FleetContext";
 import {FilterProvider} from './FilterContext'
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
@@ -12,14 +11,12 @@ const client = new ApolloClient({
 function App() {
 	return (
 		<ApolloProvider client={client}>
-			<TruckProvider>
-				<FilterProvider>
+			<FilterProvider>
 					<div className="App">
 						<Layout />
 					</div>
 				</FilterProvider>
-			</TruckProvider>
-		</ApolloProvider>
+			</ApolloProvider>
 	);
 }
 
