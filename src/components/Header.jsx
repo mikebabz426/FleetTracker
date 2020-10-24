@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Filter from "./Selectors/Filter";
+import Filter from "./Filters/Filter";
 import { FilterContext } from "./../FilterContext";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";

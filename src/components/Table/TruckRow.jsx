@@ -7,9 +7,9 @@ import {
 	Select,
 	InputBase,
 	FormControl,
+	Checkbox,
 } from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
-import ApptSelector from "../Selectors/ApptToggle";
 import { Formik, Field } from "formik";
 import { weekDays, states, truckStatus } from "./../../services/services";
 
@@ -51,6 +51,7 @@ const TruckRow = (props) => {
 				location: location,
 				usState: usState,
 				time: time,
+				appt: appt,
 				status: status,
 				needs: needs,
 				notes: notes,
@@ -66,8 +67,7 @@ const TruckRow = (props) => {
 			// 	});
 			// }}
 		>
-			{({ values }) => {
-				console.log(values);
+			{(props) => {
 				return (
 					<StyledTableRow key={id}>
 						<StyledTableCell>
@@ -135,14 +135,14 @@ const TruckRow = (props) => {
 							/>
 						</StyledTableCell>
 						<StyledTableCell>
-							<ApptSelector checked={appt} id={id} />
+							<Field name="appt" as={Checkbox} id={id} />
 						</StyledTableCell>
 						<StyledTableCell>
 							<FormControl variant="outlined" className={classes.formControl}>
 								<Field
 									className={classes.selected}
 									as={Select}
-									name="usState"
+									name="status"
 									variant="outlined"
 									input={<CustomInput />}
 								>

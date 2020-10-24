@@ -1,5 +1,5 @@
 export const states = [
-	"--",
+	"",
 	"AL",
 	"AZ",
 	"AR",
@@ -114,7 +114,7 @@ export const west = [
 ]
 
 export const weekDays = [
-	"--",
+	"",
 	'Mon',
 	'Tue',
 	'Wed',
@@ -125,7 +125,7 @@ export const weekDays = [
 ]
 
 export const truckStatus = [
-	"--",
+	"",
 	'Parked',
 	'Enroute',
 	'On-Site',
