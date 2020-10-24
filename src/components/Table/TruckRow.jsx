@@ -1,9 +1,17 @@
 import React from "react";
-import { TextField, TableCell, TableRow } from "@material-ui/core";
+import {
+	TextField,
+	TableCell,
+	TableRow,
+	MenuItem,
+	Select,
+	InputBase,
+	FormControl,
+} from "@material-ui/core";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import ApptSelector from "../Selectors/ApptToggle";
-import Selector from "./../Selectors/Selector";
 import { Formik, Field } from "formik";
+import { weekDays, states, truckStatus } from "./../../services/services";
 
 // const UPDATE_FIELD = gql`
 // 	mutation Update($id: uuid!, $notes: String!) {
@@ -63,7 +71,25 @@ const TruckRow = (props) => {
 				return (
 					<StyledTableRow key={id}>
 						<StyledTableCell>
-							<Field as={Selector} name="day" />
+							<FormControl variant="outlined" className={classes.formControl}>
+								<Field
+									className={classes.selected}
+									as={Select}
+									name="day"
+									variant="outlined"
+									input={<CustomInput />}
+								>
+									{weekDays.map((day) => (
+										<MenuItem
+											className={classes.selected}
+											value={day}
+											key={day}
+										>
+											{day}
+										</MenuItem>
+									))}
+								</Field>
+							</FormControl>
 						</StyledTableCell>
 						<StyledTableCell>{cell}</StyledTableCell>
 						<StyledTableCell>{driver}</StyledTableCell>
@@ -82,7 +108,21 @@ const TruckRow = (props) => {
 							/>
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field as={Selector} name="usState" />
+							<FormControl variant="outlined" className={classes.formControl}>
+								<Field
+									className={classes.selected}
+									as={Select}
+									name="usState"
+									variant="outlined"
+									input={<CustomInput />}
+								>
+									{states.map((st) => (
+										<MenuItem className={classes.selected} value={st} key={st}>
+											{st}
+										</MenuItem>
+									))}
+								</Field>
+							</FormControl>
 						</StyledTableCell>
 						<StyledTableCell>
 							<Field
@@ -98,7 +138,21 @@ const TruckRow = (props) => {
 							<ApptSelector checked={appt} id={id} />
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field as={Selector} name="status" />
+							<FormControl variant="outlined" className={classes.formControl}>
+								<Field
+									className={classes.selected}
+									as={Select}
+									name="usState"
+									variant="outlined"
+									input={<CustomInput />}
+								>
+									{truckStatus.map((st) => (
+										<MenuItem className={classes.selected} value={st} key={st}>
+											{st}
+										</MenuItem>
+									))}
+								</Field>
+							</FormControl>
 						</StyledTableCell>
 						<StyledTableCell>
 							<Field
@@ -132,6 +186,52 @@ const TruckRow = (props) => {
 };
 
 //Custom Component Styling
+
+const CustomInput = withStyles((theme) => ({
+	input: {
+		borderRadius: 4,
+		position: "relative",
+		backgroundColor: theme.palette.background.paper,
+		border: "1px solid #ced4da",
+		fontSize: 16,
+		padding: "10px 26px 10px 12px",
+		transition: theme.transitions.create(["border-color", "box-shadow"]),
+
+		"&:focus": {
+			borderRadius: 4,
+			borderColor: theme.palette.secondary,
+			boxShadow: `0 0 0 0.2rem rgba(102,187,106,.75)`,
+		},
+	},
+}))(InputBase);
+
+const useStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 80,
+	},
+	selectEmpty: {
+		marginTop: theme.spacing(2),
+	},
+	selected: {
+		fontWeight: "bold",
+	},
+	inputCenter: {
+		textAlign: "center",
+		color: "red",
+	},
+
+	location: {
+		fontWeight: "bold",
+	},
+
+	table: {
+		minWidth: 700,
+	},
+	notes: {
+		backgroundColor: "#fff",
+	},
+}));
 
 const CustomField = withStyles({
 	root: {
@@ -170,23 +270,5 @@ const StyledTableRow = withStyles((theme) => ({
 		},
 	},
 }))(TableRow);
-
-const useStyles = makeStyles({
-	inputCenter: {
-		textAlign: "center",
-		color: "red",
-	},
-
-	location: {
-		fontWeight: "bold",
-	},
-
-	table: {
-		minWidth: 700,
-	},
-	notes: {
-		backgroundColor: "#fff",
-	},
-});
 
 export default TruckRow;
