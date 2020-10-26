@@ -1,5 +1,6 @@
 import React from "react";
 import {
+	Typography,
 	TextField,
 	TableCell,
 	TableRow,
@@ -12,19 +13,10 @@ import {
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { Formik, Field } from "formik";
 import { weekDays, states, truckStatus } from "./../../services/services";
-
-// const UPDATE_FIELD = gql`
-// 	mutation Update($id: uuid!, $notes: String!) {
-// 		update_fleet_table_by_pk(pk_columns: { id: $id }, _set: { notes: $notes }) {
-// 			id
-// 			notes
-// 		}
-// 	}
-// `;
+import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
 
 const TruckRow = (props) => {
 	const classes = useStyles();
-	// const [updateTruck] = useMutation(UPDATE_FIELD);
 
 	const {
 		id,
@@ -55,128 +47,189 @@ const TruckRow = (props) => {
 				status: status,
 				needs: needs,
 				notes: notes,
+				edit: false,
 			}}
-			// onSubmit={(values) => {
-			// 	updateDriver({
-			// 		variables: {
-			// 			location: values.location,
-			// 			time: values.time,
-			// 			needs: values.needs,
-			// 			notes: values.notes,
-			// 		},
-			// 	});
-			// }}
 		>
-			{(props) => {
+			{({ values, setFieldValue }) => {
+				let setClass;
+				type === "53' Van"
+					? (setClass = classes.van)
+					: (setClass = classes.reefer);
+
 				return (
 					<StyledTableRow key={id}>
 						<StyledTableCell>
-							<FormControl variant="outlined" className={classes.formControl}>
-								<Field
-									className={classes.selected}
-									as={Select}
-									name="day"
-									variant="outlined"
-									input={<CustomInput />}
-								>
-									{weekDays.map((day) => (
-										<MenuItem
-											className={classes.selected}
-											value={day}
-											key={day}
-										>
-											{day}
-										</MenuItem>
-									))}
-								</Field>
-							</FormControl>
+							<EditTwoToneIcon
+								className={classes.edit}
+								color="primary"
+								onClick={() => setFieldValue("edit", !values.edit, false)}
+							/>
+						</StyledTableCell>
+						<StyledTableCell>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.day}
+								</Typography>
+							) : (
+								<FormControl variant="outlined" className={classes.formControl}>
+									<Field
+										className={classes.selected}
+										as={Select}
+										name="day"
+										variant="outlined"
+										input={<CustomInput />}
+									>
+										{weekDays.map((day) => (
+											<MenuItem
+												className={classes.selected}
+												value={day}
+												key={day}
+											>
+												{day}
+											</MenuItem>
+										))}
+									</Field>
+								</FormControl>
+							)}
 						</StyledTableCell>
 						<StyledTableCell>{cell}</StyledTableCell>
 						<StyledTableCell>{driver}</StyledTableCell>
 						<StyledTableCell>{truck}</StyledTableCell>
 						<StyledTableCell>{trailer}</StyledTableCell>
-						<StyledTableCell>{type}</StyledTableCell>
 						<StyledTableCell>
-							<Field
-								name="location"
-								type="input"
-								size="small"
-								color="secondary"
-								variant="outlined"
-								className={classes.location}
-								as={CustomLocationField}
-							/>
+							<Typography className={setClass}>{type}</Typography>
 						</StyledTableCell>
 						<StyledTableCell>
-							<FormControl variant="outlined" className={classes.formControl}>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.location}
+								</Typography>
+							) : (
 								<Field
-									className={classes.selected}
-									as={Select}
-									name="usState"
+									name="location"
+									type="input"
+									size="small"
+									color="secondary"
 									variant="outlined"
-									input={<CustomInput />}
-								>
-									{states.map((st) => (
-										<MenuItem className={classes.selected} value={st} key={st}>
-											{st}
-										</MenuItem>
-									))}
-								</Field>
-							</FormControl>
+									className={classes.location}
+									as={CustomLocationField}
+								/>
+							)}
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field
-								name="time"
-								type="input"
-								size="small"
-								color="secondary"
-								className={classes.inputCenter}
-								as={CustomField}
-							/>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.usState}
+								</Typography>
+							) : (
+								<FormControl variant="outlined" className={classes.formControl}>
+									<Field
+										className={classes.selected}
+										as={Select}
+										name="usState"
+										variant="outlined"
+										input={<CustomInput />}
+									>
+										{states.map((st) => (
+											<MenuItem
+												className={classes.selected}
+												value={st}
+												key={st}
+											>
+												{st}
+											</MenuItem>
+										))}
+									</Field>
+								</FormControl>
+							)}
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field name="appt" as={Checkbox} id={id} />
-						</StyledTableCell>
-						<StyledTableCell>
-							<FormControl variant="outlined" className={classes.formControl}>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.time}
+								</Typography>
+							) : (
 								<Field
-									className={classes.selected}
-									as={Select}
-									name="status"
+									name="time"
+									type="input"
+									size="small"
+									color="secondary"
+									className={classes.inputCenter}
+									as={CustomField}
+								/>
+							)}
+						</StyledTableCell>
+						<StyledTableCell>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.appt} //icon here
+								</Typography>
+							) : (
+								<Field name="appt" as={Checkbox} id={id} />
+							)}
+						</StyledTableCell>
+						<StyledTableCell>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.status}
+								</Typography>
+							) : (
+								<FormControl variant="outlined" className={classes.formControl}>
+									<Field
+										className={classes.selected}
+										as={Select}
+										name="status"
+										variant="outlined"
+										input={<CustomInput />}
+									>
+										{truckStatus.map((st) => (
+											<MenuItem
+												className={classes.selected}
+												value={st}
+												key={st}
+											>
+												{st}
+											</MenuItem>
+										))}
+									</Field>
+								</FormControl>
+							)}
+						</StyledTableCell>
+						<StyledTableCell>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.needs}
+								</Typography>
+							) : (
+								<Field
+									name="needs"
+									label="Needs"
+									type="input"
 									variant="outlined"
-									input={<CustomInput />}
-								>
-									{truckStatus.map((st) => (
-										<MenuItem className={classes.selected} value={st} key={st}>
-											{st}
-										</MenuItem>
-									))}
-								</Field>
-							</FormControl>
+									size="small"
+									color="secondary"
+									className={classes.notes}
+									as={TextField}
+								/>
+							)}
 						</StyledTableCell>
 						<StyledTableCell>
-							<Field
-								name="needs"
-								label="Needs"
-								type="input"
-								variant="outlined"
-								size="small"
-								color="secondary"
-								className={classes.notes}
-								as={TextField}
-							/>
-						</StyledTableCell>
-						<StyledTableCell>
-							<Field
-								name="notes"
-								label="Notes"
-								type="input"
-								variant="outlined"
-								size="small"
-								color="secondary"
-								className={classes.notes}
-								as={TextField}
-							/>
+							{values.edit === false ? (
+								<Typography className={classes.typeStyle}>
+									{values.notes}
+								</Typography>
+							) : (
+								<Field
+									name="notes"
+									label="Notes"
+									type="input"
+									variant="outlined"
+									size="small"
+									color="secondary"
+									className={classes.notes}
+									as={TextField}
+								/>
+							)}
 						</StyledTableCell>
 					</StyledTableRow>
 				);
@@ -230,6 +283,20 @@ const useStyles = makeStyles((theme) => ({
 	},
 	notes: {
 		backgroundColor: "#fff",
+	},
+	typeStyle: {
+		fontWeight: "bold",
+	},
+	edit: {
+		cursor: "pointer",
+	},
+	van: {
+		color: "green",
+		fontWeight: "bold",
+	},
+	reefer: {
+		color: "red",
+		fontWeight: "bold",
 	},
 }));
 

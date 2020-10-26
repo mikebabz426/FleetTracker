@@ -32,6 +32,7 @@ const TableHeader = () => {
 	return (
 		<TableHead>
 			<TableRow>
+				<StyledTableCell />
 				{headerNames.map((header) => (
 					<StyledTableCell key={header}>{header}</StyledTableCell>
 				))}
