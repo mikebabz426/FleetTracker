@@ -13,7 +13,7 @@ import {
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { Formik, Field } from "formik";
 import { weekDays, states, truckStatus } from "./../../services/services";
-import EditTwoToneIcon from "@material-ui/icons/EditTwoTone";
+import { EditTwoTone, SaveRounded } from "@material-ui/icons";
 
 const TruckRow = (props) => {
 	const classes = useStyles();
@@ -51,20 +51,31 @@ const TruckRow = (props) => {
 			}}
 		>
 			{({ values, setFieldValue }) => {
-				let setClass;
+				let trailerClass;
+
 				type === "53' Van"
-					? (setClass = classes.van)
-					: (setClass = classes.reefer);
+					? (trailerClass = classes.van)
+					: (trailerClass = classes.reefer);
 
 				return (
 					<StyledTableRow key={id}>
+						<StyledTableCell />
 						<StyledTableCell>
-							<EditTwoToneIcon
-								className={classes.edit}
-								color="primary"
-								onClick={() => setFieldValue("edit", !values.edit, false)}
-							/>
+							{values.edit === false ? (
+								<EditTwoTone
+									className={classes.edit}
+									color="primary"
+									onClick={() => setFieldValue("edit", true, false)}
+								/>
+							) : (
+								<SaveRounded
+									className={classes.edit}
+									color="secondary"
+									onClick={() => setFieldValue("edit", false, false)}
+								/>
+							)}
 						</StyledTableCell>
+
 						<StyledTableCell>
 							{values.edit === false ? (
 								<Typography className={classes.typeStyle}>
@@ -97,7 +108,7 @@ const TruckRow = (props) => {
 						<StyledTableCell>{truck}</StyledTableCell>
 						<StyledTableCell>{trailer}</StyledTableCell>
 						<StyledTableCell>
-							<Typography className={setClass}>{type}</Typography>
+							<Typography className={trailerClass}>{type}</Typography>
 						</StyledTableCell>
 						<StyledTableCell>
 							{values.edit === false ? (
@@ -231,6 +242,7 @@ const TruckRow = (props) => {
 								/>
 							)}
 						</StyledTableCell>
+						<StyledTableCell />
 					</StyledTableRow>
 				);
 			}}
@@ -290,6 +302,7 @@ const useStyles = makeStyles((theme) => ({
 	edit: {
 		cursor: "pointer",
 	},
+
 	van: {
 		color: "green",
 		fontWeight: "bold",
@@ -325,8 +338,8 @@ const StyledTableCell = withStyles((theme) => ({
 		color: theme.palette.common.white,
 	},
 	body: {
-		fontSize: 14,
-		padding: ".2rem 1rem .2rem 1rem",
+		fontSize: 16,
+		padding: ".5rem 1rem .5rem 1rem",
 	},
 }))(TableCell);
 

@@ -36,7 +36,7 @@ const FLEET_ALL = gql`
 const FleetTable = () => {
 	const [filters] = useContext(FilterContext);
 
-	const { loading, error, data } = useQuery(FLEET_ALL);
+	const { loading, error, data, refetch } = useQuery(FLEET_ALL);
 
 	if (loading) return <CircularProgress />;
 	if (error) return <p>Error :(</p>;

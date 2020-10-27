@@ -8,8 +8,8 @@ const StyledTableCell = withStyles((theme) => ({
 		color: theme.palette.common.white,
 	},
 	body: {
-		fontSize: 14,
-		padding: ".2rem 1rem",
+		fontSize: 18,
+		padding: ".2rem .5rem",
 	},
 }))(TableCell);
 
@@ -33,9 +33,12 @@ const TableHeader = () => {
 		<TableHead>
 			<TableRow>
 				<StyledTableCell />
+				<StyledTableCell />
+
 				{headerNames.map((header) => (
 					<StyledTableCell key={header}>{header}</StyledTableCell>
 				))}
+				<StyledTableCell />
 			</TableRow>
 		</TableHead>
 	);
