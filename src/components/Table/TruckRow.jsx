@@ -14,9 +14,50 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { Formik, Field } from "formik";
 import { weekDays, states, truckStatus } from "./../../services/services";
 import { EditTwoTone, SaveRounded } from "@material-ui/icons";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import { useMutation, gql } from "@apollo/client";
+
+const UPDATE_TRUCK = gql`
+	mutation Update(
+		$id: uuid!
+		$day: String!
+		$location: String!
+		$usState: String!
+		$time: String!
+		$appt: Boolean!
+		$status: String!
+		$needs: String!
+		$notes: String!
+	) {
+		update_fleet_table_by_pk(
+			pk_columns: { id: $id }
+			_set: {
+				day: $day
+				location: $location
+				usState: $usState
+				time: $time
+				appt: $appt
+				status: $status
+				needs: $needs
+				notes: $notes
+			}
+		) {
+			day
+			location
+			usState
+			time
+			appt
+			status
+			needs
+			notes
+		}
+	}
+`;
 
 const TruckRow = (props) => {
 	const classes = useStyles();
+	const [updateTruck] = useMutation(UPDATE_TRUCK);
 
 	const {
 		id,
@@ -52,10 +93,25 @@ const TruckRow = (props) => {
 		>
 			{({ values, setFieldValue }) => {
 				let trailerClass;
-
 				type === "53' Van"
 					? (trailerClass = classes.van)
 					: (trailerClass = classes.reefer);
+
+				const submit = () => {
+					updateTruck({
+						variables: {
+							id: values.id,
+							day: values.day,
+							location: values.location,
+							usState: values.usState,
+							time: values.time,
+							appt: values.appt,
+							status: values.status,
+							needs: values.needs,
+							notes: values.notes,
+						},
+					});
+				};
 
 				return (
 					<StyledTableRow key={id}>
@@ -65,13 +121,19 @@ const TruckRow = (props) => {
 								<EditTwoTone
 									className={classes.edit}
 									color="primary"
-									onClick={() => setFieldValue("edit", true, false)}
+									onClick={() => {
+										submit();
+										setFieldValue("edit", true, false);
+									}}
 								/>
 							) : (
 								<SaveRounded
 									className={classes.edit}
 									color="secondary"
-									onClick={() => setFieldValue("edit", false, false)}
+									onClick={() => {
+										submit();
+										setFieldValue("edit", false, false);
+									}}
 								/>
 							)}
 						</StyledTableCell>
@@ -172,11 +234,18 @@ const TruckRow = (props) => {
 						</StyledTableCell>
 						<StyledTableCell>
 							{values.edit === false ? (
-								<Typography className={classes.typeStyle}>
-									{values.appt} //icon here
-								</Typography>
+								values.appt === true ? (
+									<CheckBoxIcon />
+								) : (
+									<CheckBoxOutlineBlankIcon />
+								)
 							) : (
-								<Field name="appt" as={Checkbox} id={id} />
+								<Field
+									name="appt"
+									as={Checkbox}
+									id={id}
+									checked={values.appt}
+								/>
 							)}
 						</StyledTableCell>
 						<StyledTableCell>

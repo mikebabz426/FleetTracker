@@ -95,9 +95,9 @@ const AddTruckForm = (props) => {
 					window.location.reload(true);
 				}}
 			>
-				{({ handleSubmit, errors, touched }) => {
+				{({ errors, touched }) => {
 					return (
-						<Form onSubmit={handleSubmit}>
+						<Form>
 							<Field
 								name="driverName"
 								type="input"
@@ -157,13 +157,13 @@ const AddTruckForm = (props) => {
 							) : null}
 
 							<CustomRadio
-								value="53 Reefer"
+								value="53' Reefer"
 								name="trailerType"
 								type="radio"
 								label="53 Reefer"
 							/>
 							<CustomRadio
-								value="53 Van"
+								value="53' Van"
 								name="trailerType"
 								type="radio"
 								label="53 Van"
