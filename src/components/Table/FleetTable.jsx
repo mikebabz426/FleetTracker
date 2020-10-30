@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { FilterContext } from "../../FilterContext";
+import React, { useContext, useEffect } from "react";
 import {
 	Paper,
 	TableContainer,
@@ -7,6 +6,7 @@ import {
 	TableBody,
 	CircularProgress,
 } from "@material-ui/core";
+import { FilterContext } from "../../FilterContext";
 import TableHeader from "./TableHeader";
 import TruckRow from "./TruckRow";
 
@@ -14,11 +14,15 @@ const FleetTable = (props) => {
 	const [filters] = useContext(FilterContext);
 	const { loading, error, data, refetch } = props;
 
+	useEffect(() => {
+		refetch();
+	}, [filters, refetch]);
+
 	if (loading) return <CircularProgress />;
 	if (error) return <p>Error :(</p>;
 
 	const { fleet_table: trucks } = data;
-	console.log(trucks);
+
 	const filteredTrucks = trucks
 		.filter((truck) => {
 			if (filters.team === "All") return true;

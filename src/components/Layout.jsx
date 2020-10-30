@@ -37,23 +37,22 @@ const FLEET_ALL = gql`
 
 const Layout = () => {
 	const { loading, error, data, refetch } = useQuery(FLEET_ALL);
-	const [toggle, setToggle] = useState(false);
+	const [addTruck, setAddTruck] = useState(false);
 	const classes = useStyles();
 
 	return (
 		<ThemeProvider theme={theme}>
 			<Grid container direction="column">
 				<Grid item className={classes.customHeader}>
-					<Header toggler={(e) => setToggle(!toggle)} />
+					<Header addTruck={(e) => setAddTruck(!addTruck)} />
 				</Grid>
 				<Grid item container>
 					<Grid item xs={false} sm={false} />
 					<Grid item xs={12} sm={12}>
-						{toggle ? (
+						{addTruck ? (
 							<AddTruckForm
 								refetch={refetch}
-								open={toggle}
-								toggler={(e) => setToggle(!toggle)}
+								addTruck={(e) => setAddTruck(!addTruck)}
 							/>
 						) : (
 							<FleetTable

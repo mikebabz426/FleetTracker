@@ -1,28 +1,9 @@
 import React, { useContext } from "react";
-import { AppBar, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Fab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Filter from "./Filters/Filter";
-import { FilterContext } from "./../FilterContext";
-import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
-
-const useStyles = makeStyles(() => ({
-	typographyStyles: {
-		color: "#fff",
-	},
-	toolbar: {
-		justifyContent: "space-between",
-	},
-	fab: {
-		backgroundColor: "#fff",
-		color: "#66bb6a",
-		fontWeight: "bold",
-		"&:hover": {
-			color: "#fff",
-			backgroundColor: "#66bb6a",
-		},
-	},
-}));
+import { FilterContext } from "./../FilterContext";
+import Filter from "./Filters/Filter";
 
 const Header = (props) => {
 	const [filters, setFilters] = useContext(FilterContext);
@@ -53,7 +34,7 @@ const Header = (props) => {
 					handler={(e) => handleChange(e, "day")}
 				/>
 				<Fab
-					onClick={props.toggler}
+					onClick={props.addTruck}
 					className={classes.fab}
 					size="small"
 					color="primary"
@@ -65,5 +46,24 @@ const Header = (props) => {
 		</AppBar>
 	);
 };
+
+//Custom Styles
+
+const useStyles = makeStyles(() => ({
+	typographyStyles: {
+		color: "#fff",
+	},
+	toolbar: {
+		justifyContent: "space-between",
+	},
+	fab: {
+		backgroundColor: "#fff",
+		color: "#66bb6a",
+		"&:hover": {
+			color: "#fff",
+			backgroundColor: "#66bb6a",
+		},
+	},
+}));
 
 export default Header;

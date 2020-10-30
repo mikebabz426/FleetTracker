@@ -1,7 +1,6 @@
 import React from "react";
-import { FormControl, Select } from "@material-ui/core";
+import { FormControl, Select, InputBase } from "@material-ui/core";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
 
 const Filter = ({ label, options, handler }) => {
 	const classes = useStyles();

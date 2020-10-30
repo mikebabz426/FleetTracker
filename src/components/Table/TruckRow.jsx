@@ -10,12 +10,15 @@ import {
 	FormControl,
 	Checkbox,
 } from "@material-ui/core";
+import {
+	EditTwoTone,
+	SaveRounded,
+	CheckBox,
+	CheckBoxOutlineBlank,
+} from "@material-ui/icons";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { Formik, Field } from "formik";
 import { weekDays, states, truckStatus } from "./../../services/services";
-import { EditTwoTone, SaveRounded } from "@material-ui/icons";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import { useMutation, gql } from "@apollo/client";
 
 const UPDATE_TRUCK = gql`
@@ -236,9 +239,9 @@ const TruckRow = (props) => {
 						<StyledTableCell>
 							{values.edit === false ? (
 								values.appt === true ? (
-									<CheckBoxIcon />
+									<CheckBox />
 								) : (
-									<CheckBoxOutlineBlankIcon />
+									<CheckBoxOutlineBlank />
 								)
 							) : (
 								<Field

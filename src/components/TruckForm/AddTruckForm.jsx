@@ -7,6 +7,7 @@ import {
 	Avatar,
 	Radio,
 	FormControlLabel,
+	Paper,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
@@ -62,7 +63,6 @@ const CustomRadio = ({ label, ...props }) => {
 const AddTruckForm = (props) => {
 	const classes = useStyles();
 	const [addDriver] = useMutation(ADD_DRIVER);
-	console.log(props);
 
 	return (
 		<Container component="main" maxWidth="xs" className={classes.container}>
@@ -93,8 +93,7 @@ const AddTruckForm = (props) => {
 						},
 					});
 					props.refetch();
-					props.toggler(false);
-					window.location.reload();
+					props.addTruck(false);
 				}}
 			>
 				{({ errors, touched }) => {
@@ -197,7 +196,7 @@ const AddTruckForm = (props) => {
 
 const useStyles = makeStyles((theme) => ({
 	container: {
-		backgroundColor: "#fff",
+		backgroundColor: Paper,
 		borderRadius: "3px",
 		display: "flex",
 		flexDirection: "column",
