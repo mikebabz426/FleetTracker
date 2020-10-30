@@ -74,6 +74,7 @@ const TruckRow = (props) => {
 		status,
 		needs,
 		notes,
+		refetch,
 	} = props;
 
 	return (
@@ -111,6 +112,7 @@ const TruckRow = (props) => {
 							notes: values.notes,
 						},
 					});
+					refetch();
 				};
 
 				return (
@@ -122,7 +124,6 @@ const TruckRow = (props) => {
 									className={classes.edit}
 									color="primary"
 									onClick={() => {
-										submit();
 										setFieldValue("edit", true, false);
 									}}
 								/>

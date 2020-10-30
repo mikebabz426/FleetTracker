@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { gql, useQuery } from "@apollo/client";
 import { FilterContext } from "../../FilterContext";
 import {
 	Paper,
@@ -11,38 +10,15 @@ import {
 import TableHeader from "./TableHeader";
 import TruckRow from "./TruckRow";
 
-const FLEET_ALL = gql`
-	query FLEET_ALL {
-		fleet_table {
-			appt
-			cell
-			day
-			driver
-			id
-			location
-			needs
-			notes
-			status
-			team
-			time
-			trailer
-			truck
-			type
-			usState
-		}
-	}
-`;
-
-const FleetTable = () => {
+const FleetTable = (props) => {
 	const [filters] = useContext(FilterContext);
-
-	const { loading, error, data } = useQuery(FLEET_ALL);
+	const { loading, error, data, refetch } = props;
 
 	if (loading) return <CircularProgress />;
 	if (error) return <p>Error :(</p>;
 
 	const { fleet_table: trucks } = data;
-
+	console.log(trucks);
 	const filteredTrucks = trucks
 		.filter((truck) => {
 			if (filters.team === "All") return true;
@@ -55,7 +31,7 @@ const FleetTable = () => {
 			return false;
 		})
 		.map((truck) => {
-			return <TruckRow key={truck.id} {...truck} />;
+			return <TruckRow refetch={refetch} key={truck.id} {...truck} />;
 		});
 
 	return (

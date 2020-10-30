@@ -62,6 +62,7 @@ const CustomRadio = ({ label, ...props }) => {
 const AddTruckForm = (props) => {
 	const classes = useStyles();
 	const [addDriver] = useMutation(ADD_DRIVER);
+	console.log(props);
 
 	return (
 		<Container component="main" maxWidth="xs" className={classes.container}>
@@ -81,7 +82,6 @@ const AddTruckForm = (props) => {
 				}}
 				validationSchema={truckSchema}
 				onSubmit={(values) => {
-					props.toggler(false);
 					addDriver({
 						variables: {
 							driver: values.driverName,
@@ -92,7 +92,9 @@ const AddTruckForm = (props) => {
 							type: values.trailerType,
 						},
 					});
-					window.location.reload(true);
+					props.refetch();
+					props.toggler(false);
+					window.location.reload();
 				}}
 			>
 				{({ errors, touched }) => {
