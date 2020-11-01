@@ -44,7 +44,10 @@ const Layout = () => {
 		<ThemeProvider theme={theme}>
 			<Grid container direction="column">
 				<Grid item className={classes.customHeader}>
-					<Header addTruck={(e) => setAddTruck(!addTruck)} />
+					<Header
+						addTruck={(e) => setAddTruck(!addTruck)}
+						addTruckState={addTruck}
+					/>
 				</Grid>
 				<Grid item container>
 					<Grid item xs={false} sm={false} />

@@ -239,9 +239,9 @@ const TruckRow = (props) => {
 						<StyledTableCell>
 							{values.edit === false ? (
 								values.appt === true ? (
-									<CheckBox />
+									<CheckBox color="secondary" />
 								) : (
-									<CheckBoxOutlineBlank />
+									<CheckBoxOutlineBlank color="secondary" />
 								)
 							) : (
 								<Field

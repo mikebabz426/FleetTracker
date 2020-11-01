@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppBar, Toolbar, Typography, Fab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { FilterContext } from "./../FilterContext";
 import Filter from "./Filters/Filter";
 
@@ -40,7 +41,7 @@ const Header = (props) => {
 					color="primary"
 					aria-label="add"
 				>
-					<AddIcon />
+					{props.addTruckState ? <ArrowBackIcon /> : <AddIcon />}
 				</Fab>
 			</Toolbar>
 		</AppBar>
