@@ -53,6 +53,7 @@ let truckSchema = Yup.object().shape({
 	truckNumber: Yup.number().required().positive().integer(),
 	trailerNumber: Yup.number().required().positive().integer(),
 	trailerType: Yup.string().required(),
+	team: Yup.string().required(),
 });
 
 //Custom Radio Input
@@ -111,6 +112,7 @@ const AddTruckForm = (props) => {
 								variant="outlined"
 								margin="normal"
 								label="Driver Name"
+								required
 								fullWidth
 								as={TextField}
 							/>
@@ -125,6 +127,7 @@ const AddTruckForm = (props) => {
 								variant="outlined"
 								margin="normal"
 								label="Phone Number"
+								required
 								fullWidth
 								as={TextField}
 							/>
@@ -139,6 +142,7 @@ const AddTruckForm = (props) => {
 								variant="outlined"
 								margin="normal"
 								label="Truck Number"
+								required
 								fullWidth
 								as={TextField}
 							/>
@@ -180,7 +184,7 @@ const AddTruckForm = (props) => {
 									Please select a trailer type
 								</Typography>
 							) : null}
-							<Typography variant="body1">Team Select: </Typography>
+							<Typography variant="body1">Select Team: </Typography>
 							<FormControl variant="outlined" className={classes.formControl}>
 								<Field
 									className={classes.selected}
@@ -200,6 +204,9 @@ const AddTruckForm = (props) => {
 									))}
 								</Field>
 							</FormControl>
+							{errors.team && touched.team ? (
+								<Typography color="error">Please select a team</Typography>
+							) : null}
 
 							<Button
 								type="submit"
