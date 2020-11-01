@@ -19,7 +19,7 @@ const Header = (props) => {
 	};
 
 	return (
-		<AppBar color="primary" position="static">
+		<AppBar color="primary" position="fixed" className={classes.appBar}>
 			<Toolbar className={classes.toolbar}>
 				<Typography className={classes.typographyStyles} variant="h6">
 					My Fleet Tracker
@@ -56,11 +56,15 @@ const Header = (props) => {
 //Custom Styles
 
 const useStyles = makeStyles(() => ({
+	appBar: {
+		margin: "0",
+	},
 	typographyStyles: {
 		color: "#fff",
 	},
 	toolbar: {
 		justifyContent: "space-between",
+		margin: "0 0",
 	},
 	box: {
 		display: "flex",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ThemeProvider, Grid } from "@material-ui/core";
+import { ThemeProvider, Grid, Box } from "@material-ui/core";
 import theme from "./../theme";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "./Header";
@@ -44,10 +44,12 @@ const Layout = () => {
 		<ThemeProvider theme={theme}>
 			<Grid container direction="column">
 				<Grid item className={classes.customHeader}>
-					<Header
-						addTruck={(e) => setAddTruck(!addTruck)}
-						addTruckState={addTruck}
-					/>
+					<Box style={{ marginBottom: "1rem" }}>
+						<Header
+							addTruck={(e) => setAddTruck(!addTruck)}
+							addTruckState={addTruck}
+						/>
+					</Box>
 				</Grid>
 				<Grid item container>
 					<Grid item xs={false} sm={false} />
