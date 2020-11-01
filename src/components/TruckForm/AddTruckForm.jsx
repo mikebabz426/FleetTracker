@@ -7,9 +7,13 @@ import {
 	Avatar,
 	Radio,
 	FormControlLabel,
+	FormControl,
+	Select,
+	MenuItem,
+	InputBase,
 	Paper,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import { Formik, Form, Field, useField } from "formik";
 import * as Yup from "yup";
@@ -63,6 +67,7 @@ const CustomRadio = ({ label, ...props }) => {
 const AddTruckForm = (props) => {
 	const classes = useStyles();
 	const [addDriver] = useMutation(ADD_DRIVER);
+	const teams = ["Team One", "Team Two", "Team Three"];
 
 	return (
 		<Container component="main" maxWidth="xs" className={classes.container}>
@@ -79,6 +84,7 @@ const AddTruckForm = (props) => {
 					truckNumber: "",
 					trailerNumber: "",
 					trailerType: "",
+					team: "",
 				}}
 				validationSchema={truckSchema}
 				onSubmit={(values) => {
@@ -88,7 +94,7 @@ const AddTruckForm = (props) => {
 							truck: values.truckNumber,
 							trailer: values.trailerNumber,
 							cell: values.phoneNumber,
-							team: "Team One",
+							team: values.team,
 							type: values.trailerType,
 						},
 					});
@@ -156,7 +162,7 @@ const AddTruckForm = (props) => {
 									Please enter a valid trailer number
 								</Typography>
 							) : null}
-
+							<Typography variant="body1">Trailer Type: </Typography>
 							<CustomRadio
 								value="53' Reefer"
 								name="trailerType"
@@ -174,6 +180,26 @@ const AddTruckForm = (props) => {
 									Please select a trailer type
 								</Typography>
 							) : null}
+							<Typography variant="body1">Team Select: </Typography>
+							<FormControl variant="outlined" className={classes.formControl}>
+								<Field
+									className={classes.selected}
+									as={Select}
+									name="team"
+									variant="outlined"
+									input={<CustomInput />}
+								>
+									{teams.map((team) => (
+										<MenuItem
+											className={classes.selected}
+											value={team}
+											key={team}
+										>
+											{team}
+										</MenuItem>
+									))}
+								</Field>
+							</FormControl>
 
 							<Button
 								type="submit"
@@ -194,7 +220,29 @@ const AddTruckForm = (props) => {
 
 //Custom Styling
 
+const CustomInput = withStyles((theme) => ({
+	input: {
+		borderRadius: 4,
+		position: "relative",
+		backgroundColor: theme.palette.background.paper,
+		border: "1px solid #ced4da",
+		fontSize: 16,
+		padding: "10px 26px 10px 12px",
+		transition: theme.transitions.create(["border-color", "box-shadow"]),
+
+		"&:focus": {
+			borderRadius: 4,
+			borderColor: theme.palette.secondary,
+			boxShadow: `0 0 0 0.2rem rgba(102,187,106,.75)`,
+		},
+	},
+}))(InputBase);
+
 const useStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 80,
+	},
 	container: {
 		backgroundColor: Paper,
 		borderRadius: "3px",
