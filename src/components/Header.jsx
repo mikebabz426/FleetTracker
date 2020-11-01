@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppBar, Toolbar, Typography, Fab } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Fab, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
@@ -24,25 +24,30 @@ const Header = (props) => {
 				<Typography className={classes.typographyStyles} variant="h6">
 					My Fleet Tracker
 				</Typography>
-				<Filter
-					label="Team"
-					options={teamOptions}
-					handler={(e) => handleChange(e, "team")}
-				/>
-				<Filter
-					label="Day"
-					options={dayOptions}
-					handler={(e) => handleChange(e, "day")}
-				/>
-				<Fab
-					onClick={props.addTruck}
-					className={classes.fab}
-					size="small"
-					color="primary"
-					aria-label="add"
-				>
-					{props.addTruckState ? <ArrowBackIcon /> : <AddIcon />}
-				</Fab>
+				<Box className={classes.box}>
+					<Typography>Team Filter: </Typography>
+					<Filter
+						label="Team"
+						options={teamOptions}
+						handler={(e) => handleChange(e, "team")}
+					/>
+					<Typography>Day Filter: </Typography>
+					<Filter
+						label="Day"
+						options={dayOptions}
+						handler={(e) => handleChange(e, "day")}
+					/>
+					<Typography>Add Truck: </Typography>
+					<Fab
+						onClick={props.addTruck}
+						className={classes.fab}
+						size="small"
+						color="primary"
+						aria-label="add"
+					>
+						{props.addTruckState ? <ArrowBackIcon /> : <AddIcon />}
+					</Fab>
+				</Box>
 			</Toolbar>
 		</AppBar>
 	);
@@ -57,9 +62,15 @@ const useStyles = makeStyles(() => ({
 	toolbar: {
 		justifyContent: "space-between",
 	},
+	box: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	fab: {
 		backgroundColor: "#fff",
 		color: "#66bb6a",
+		marginLeft: "1rem",
 		"&:hover": {
 			color: "#fff",
 			backgroundColor: "#66bb6a",
