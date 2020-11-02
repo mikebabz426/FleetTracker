@@ -10,7 +10,7 @@ const Header = (props) => {
 	const [filters, setFilters] = useContext(FilterContext);
 	const [fuelPrice, setFuelPrice] = useState(0);
 	const classes = useStyles();
-	const teamOptions = ["All", "Team One", "Team Two", "Team Three"];
+	const teamOptions = ["All", "Mike", "Alex", "Chip", "Vlad"];
 	const dayOptions = ["All", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
 	const handleChange = (e, type) => {
@@ -38,7 +38,7 @@ const Header = (props) => {
 					My Fleet Tracker
 				</Typography>
 				<Typography className={classes.typographyStyles} variant="body2">
-					US Diesel Avg: ${fuelPrice}
+					US Diesel Price Avg: ${fuelPrice} /G
 				</Typography>
 
 				<Box className={classes.box}>

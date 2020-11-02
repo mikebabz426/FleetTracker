@@ -69,7 +69,7 @@ const AddTruckForm = (props) => {
 	const { refetch, addTruck, toggle } = props;
 	const classes = useStyles();
 	const [addDriver] = useMutation(ADD_DRIVER);
-	const teams = ["Team One", "Team Two", "Team Three"];
+	const teams = ["Mike", "Alex", "Chip", "Vlad"];
 
 	useEffect(() => {
 		refetch();
