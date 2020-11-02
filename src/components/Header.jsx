@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppBar, Toolbar, Typography, Fab, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
@@ -21,13 +21,15 @@ const Header = (props) => {
 
 	const getFuelPrice = async () => {
 		await fetch(
-			`http://api.eia.gov/series/?api_key=5c7387cb68efe9616f46194d17493e35&series_id=PET.EMD_EPD2D_PTE_NUS_DPG.W`
+			`https://api.eia.gov/series/?api_key=5c7387cb68efe9616f46194d17493e35&series_id=PET.EMD_EPD2D_PTE_NUS_DPG.W`
 		)
 			.then((res) => res.json())
 			.then((data) => setFuelPrice(data.series[0].data[0][1]));
 	};
 
-	getFuelPrice();
+	useEffect(() => {
+		getFuelPrice();
+	});
 
 	return (
 		<AppBar color="primary" position="fixed" className={classes.appBar}>
