@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	Container,
 	Typography,
@@ -66,9 +66,14 @@ const CustomRadio = ({ label, ...props }) => {
 //Form Component
 
 const AddTruckForm = (props) => {
+	const { refetch, addTruck, toggle } = props;
 	const classes = useStyles();
 	const [addDriver] = useMutation(ADD_DRIVER);
 	const teams = ["Team One", "Team Two", "Team Three"];
+
+	useEffect(() => {
+		refetch();
+	}, [refetch, addTruck]);
 
 	return (
 		<Container component="main" maxWidth="xs" className={classes.container}>
@@ -99,8 +104,8 @@ const AddTruckForm = (props) => {
 							type: values.trailerType,
 						},
 					});
-					props.refetch();
-					props.addTruck(false);
+					refetch();
+					toggle(false);
 				}}
 			>
 				{({ errors, touched }) => {

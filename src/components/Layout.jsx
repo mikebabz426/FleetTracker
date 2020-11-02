@@ -57,7 +57,8 @@ const Layout = () => {
 						{addTruck ? (
 							<AddTruckForm
 								refetch={refetch}
-								addTruck={(e) => setAddTruck(!addTruck)}
+								addTruck={addTruck}
+								toggle={(e) => setAddTruck(!addTruck)}
 							/>
 						) : (
 							<FleetTable
